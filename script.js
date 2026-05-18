@@ -17,11 +17,16 @@ const formStatus = document.getElementById("formStatus");
 const STORAGE_KEY = "neuramotion-hub-posts-preview";
 
 const categoryMap = {
-  "Robotics": "로봇 자동화",
-  "Vision AI": "비전 AI",
-  "Sensor Data": "센서 데이터",
-  "Consulting": "도입 상담",
-  "Maintenance": "AI 고장 예측"
+  "Robotics": "프로젝트 공유",
+  "Vision AI": "기술 질문",
+  "Sensor Data": "기술 질문",
+  "Consulting": "아이디어 제안",
+  "Maintenance": "기술 질문",
+  "로봇 자동화": "프로젝트 공유",
+  "비전 AI": "기술 질문",
+  "센서 데이터": "기술 질문",
+  "도입 상담": "아이디어 제안",
+  "AI 고장 예측": "기술 질문"
 };
 
 function normalizeCategory(category) {
@@ -41,35 +46,7 @@ function translateSavedText(value) {
     .replaceAll("PoC", "실증");
 }
 
-const demoPosts = [
-  {
-    id: "demo-1",
-    title: "모바일 로봇용 라이다 데이터 분석 실증",
-    category: "로봇 자동화",
-    body: "실내 주행 로봇에서 수집한 라이다 로그를 기반으로 장애물 패턴과 경로 안정성을 분석하고 싶습니다.",
-    createdAt: "2026-05-17",
-    fileName: "라이다_예시_데이터.csv",
-    comments: ["지도 작성 품질 지표와 경로 이탈률을 같이 보면 좋겠습니다."]
-  },
-  {
-    id: "demo-2",
-    title: "비전 AI 기반 불량 감지 자동화",
-    category: "비전 AI",
-    body: "카메라 이미지로 표면 결함을 탐지하고 작업자에게 실시간 알림을 주는 시스템을 검토 중입니다.",
-    createdAt: "2026-05-17",
-    fileName: "결함_이미지_예시.zip",
-    comments: ["객체 인식 모델과 분류 모델을 함께 쓰는 구조를 제안합니다."]
-  },
-  {
-    id: "demo-3",
-    title: "진동 센서 기반 AI 고장 예측 대시보드",
-    category: "AI 고장 예측",
-    body: "모터 진동과 온도 데이터를 활용해 이상 징후를 조기에 발견하는 대시보드를 만들고 싶습니다.",
-    createdAt: "2026-05-17",
-    fileName: "",
-    comments: []
-  }
-];
+const demoPosts = [];
 
 let posts = loadPosts();
 
@@ -77,8 +54,8 @@ function loadPosts() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(demoPosts));
-      return [...demoPosts];
+      localStorage.setItem(STORAGE_KEY, "[]");
+      return [];
     }
     return JSON.parse(saved).map((post) => ({
       ...post,
@@ -88,7 +65,7 @@ function loadPosts() {
       comments: (post.comments || []).map((comment) => translateSavedText(comment))
     }));
   } catch (error) {
-    return [...demoPosts];
+    return [];
   }
 }
 
@@ -107,6 +84,7 @@ function escapeHtml(value) {
 }
 
 function renderPosts() {
+  if (!postList || !postCount || !postSearch || !categoryFilter) return;
   const keyword = postSearch.value.trim().toLowerCase();
   const selectedCategory = categoryFilter.value;
   const filtered = posts.filter((post) => {
@@ -183,6 +161,8 @@ if (nav && menuToggle) {
   });
 }
 
+const revealItems = document.querySelectorAll(".reveal");
+
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -190,9 +170,18 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.16 });
+}, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
 
-document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+revealItems.forEach((element) => revealObserver.observe(element));
+
+window.setTimeout(() => {
+  revealItems.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+      element.classList.add("visible");
+    }
+  });
+}, 120);
 
 if (openPostModal) openPostModal.addEventListener("click", openModal);
 
@@ -251,7 +240,7 @@ if (postSearch) postSearch.addEventListener("input", renderPosts);
 if (categoryFilter) categoryFilter.addEventListener("change", renderPosts);
 
 if (resetDemoPosts) resetDemoPosts.addEventListener("click", () => {
-  posts = [...demoPosts];
+  posts = [];
   savePosts();
   postSearch.value = "";
   categoryFilter.value = "all";
@@ -260,7 +249,7 @@ if (resetDemoPosts) resetDemoPosts.addEventListener("click", () => {
 
 if (fileDemo) fileDemo.addEventListener("change", () => {
   const file = fileDemo.files[0];
-  fileDemoName.textContent = file ? `${file.name} 선택됨` : "데이터셋, 이미지, 로그 파일을 첨부할 수 있습니다.";
+  fileDemoName.textContent = file ? `${file.name} 선택됨` : "이미지, 자료, 로그 파일을 첨부할 수 있습니다.";
 });
 
 if (contactForm) contactForm.addEventListener("submit", (event) => {
@@ -496,4 +485,32 @@ function nmInitPlatformTabs() {
 }
 
 nmInitPlatformTabs();
+
+function nmFastScroll(delta) {
+  if (!delta || document.querySelector(".modal.open")) return;
+  const scroller = document.scrollingElement || document.documentElement;
+  const max = Math.max(0, scroller.scrollHeight - window.innerHeight);
+  scroller.scrollTop = Math.max(0, Math.min(max, scroller.scrollTop + delta));
+}
+
+window.addEventListener("wheel", (event) => {
+  if (document.querySelector(".modal.open")) return;
+  event.preventDefault();
+  nmFastScroll(event.deltaY * 0.9);
+}, { passive: false, capture: true });
+
+let nmFastTouchY = 0;
+window.addEventListener("touchstart", (event) => {
+  nmFastTouchY = event.touches[0]?.clientY || 0;
+}, { passive: true, capture: true });
+
+window.addEventListener("touchmove", (event) => {
+  if (document.querySelector(".modal.open")) return;
+  const current = event.touches[0]?.clientY || nmFastTouchY;
+  nmFastScroll((nmFastTouchY - current) * 2.2);
+  nmFastTouchY = current;
+}, { passive: true, capture: true });
+
+
+
 

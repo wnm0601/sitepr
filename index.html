@@ -19,8 +19,8 @@
       <a href="#hero">홈</a>
       <a href="#solutions">솔루션</a>
       <a href="#projects">프로젝트</a>
-      <a href="#technology">기술</a>
       <a href="./platform.html">운영 플랫폼</a>
+      <a href="#hub">커뮤니티</a>
       <a href="#contact">문의</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
@@ -30,468 +30,126 @@
     </button>
   </header>
 
-  <main>
-    <section class="hero section" id="hero">
+      <main>
+    <section class="hero section home-hero" id="hero">
       <canvas class="hero-network" id="networkCanvas" aria-hidden="true"></canvas>
       <div class="hero-grid" aria-hidden="true"></div>
-      <div class="orb orb-blue" aria-hidden="true"></div>
-      <div class="orb orb-purple" aria-hidden="true"></div>
       <div class="container hero-inner reveal">
         <div class="hero-text">
-          <p class="eyebrow">산업 AI · 로봇공학 · 센서 데이터 분석</p>
+          <p class="eyebrow">NeuraMotion AI</p>
           <h1>로봇과 산업을 위한 AI 자동화</h1>
-          <p class="hero-slogan">현장 장비와 연결되는 피지컬 AI</p>
-          <p class="hero-copy">
-            로봇, 기계, 제어 시스템, 센서 데이터를 AI로 분석하여 자동화 방향을 제시하고 실제 구현 가능한 솔루션으로 연결합니다.
-          </p>
+          <p class="hero-slogan">AI로 현장 데이터를 분석하고 로봇 자동화를 설계합니다.</p>
+          <p class="hero-copy">NeuraMotion AI는 로봇, 센서, 비전 AI를 실제 산업 자동화로 연결하는 기술 기업입니다.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#solutions">솔루션 보기</a>
-            <a class="btn btn-secondary" href="#projects">프로젝트 보기</a>
-          </div>
-          <div class="hero-metrics" aria-label="기업 핵심 지표">
-            <div>
-              <strong>12+</strong>
-              <span>핵심 AI 기술</span>
-            </div>
-            <div>
-              <strong>5</strong>
-              <span>로봇 제어 모듈</span>
-            </div>
-            <div>
-              <strong>24/7</strong>
-              <span>데이터 모니터링</span>
-            </div>
+            <a class="btn btn-secondary" href="./platform.html">운영 플랫폼 보기</a>
           </div>
         </div>
-        <aside class="hero-visual os-preview-card" aria-label="NeuraMotion OS 미리보기">
-          <div class="os-preview-header">
-            <span>NeuraMotion OS</span>
-            <strong>AI 기반 로봇 운영 플랫폼</strong>
-            <em><i></i>정상 운전</em>
-          </div>
-          <div class="os-preview-grid">
-            <article>
-              <span>AI 추론 상태</span>
-              <strong>98.7%</strong>
-              <p>실시간 분석 안정</p>
-            </article>
-            <article>
-              <span>로봇 제어 상태</span>
-              <strong>12대</strong>
-              <p>운영 장비 연결</p>
-            </article>
-            <article>
-              <span>센서 융합 상태</span>
-              <strong>42개</strong>
-              <p>데이터 스트림 동기화</p>
-            </article>
-          </div>
-          <a class="btn btn-primary os-preview-button" href="./platform.html">운영 플랫폼 보기</a>
-        </aside>
 
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container split reveal">
-        <div>
-          <p class="eyebrow">기업 소개</p>
-          <h2>현장 장비와 산업 AI를 실제 자동화로 연결합니다.</h2>
-        </div>
-        <div class="section-copy">
-          <p>
-            NeuraMotion AI는 로봇, 센서, 비전 AI, 자율주행 기술을 실제 산업 현장의 자동화 문제와 연결하는 현장 장비와 연결되는 AI 기업입니다.
-          </p>
-          <p>
-            데이터 분석에서 모델링, 제어, 모니터링까지 이어지는 통합 접근으로 기계의 상태를 읽고, 공정의 병목을 찾고, 자동화가 실행될 수 있는 방향을 설계합니다.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt-section" id="problem">
+    <section class="section home-solutions" id="solutions">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">산업 현장의 문제</p>
-          <h2>산업 현장에서는 이미 많은 데이터가 발생하지만, 실제 개선과 자동화로 이어지지 못하고 있습니다.</h2>
+          <p class="eyebrow">핵심 솔루션</p>
+          <h2>현장 데이터를 분석하고 로봇 자동화로 연결합니다.</h2>
         </div>
-        <div class="card-grid problem-grid">
+        <div class="home-card-grid">
           <article class="glass-card reveal">
             <span class="card-index">01</span>
-            <h3>기계 고장 예측 어려움</h3>
-            <p>운전 데이터는 쌓이지만 고장 전조와 정비 시점을 판단하기 어렵습니다.</p>
+            <h3>AI 데이터 분석</h3>
+            <p>센서, 설비, 공정 데이터를 분석해 자동화에 필요한 판단 기준을 설계합니다.</p>
           </article>
           <article class="glass-card reveal">
             <span class="card-index">02</span>
-            <h3>공정 비효율</h3>
-            <p>반복되는 작업과 병목이 숨어 있어 생산성과 품질 개선이 지연됩니다.</p>
+            <h3>로봇 자동화 설계</h3>
+            <p>모바일 로봇, 로봇 셀, 제어 시스템을 실제 현장 흐름에 맞게 구성합니다.</p>
           </article>
           <article class="glass-card reveal">
             <span class="card-index">03</span>
-            <h3>로봇 제어 한계</h3>
-            <p>현장 변동성에 따라 로봇이 유연하게 판단하고 대응하기 어렵습니다.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-index">04</span>
-            <h3>데이터 활용 부족</h3>
-            <p>수집된 데이터가 대시보드와 자동화 의사결정으로 이어지지 못합니다.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-index">05</span>
-            <h3>센서 데이터 분석 문제</h3>
-            <p>진동, 온도, 이미지, 거리 데이터가 분리되어 통합 해석이 어렵습니다.</p>
-          </article>
-          <article class="glass-card reveal">
-            <span class="card-index">06</span>
-            <h3>AI 도입 방향성 부재</h3>
-            <p>무엇부터 자동화해야 하는지, 어떤 모델이 필요한지 판단하기 어렵습니다.</p>
+            <h3>비전 AI와 센서 융합</h3>
+            <p>카메라와 라이다 데이터를 결합해 인식, 검사, 안전 감지를 구현합니다.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section data-section" id="data-preview">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">운영 데이터 미리보기</p>
-          <h2>센서와 설비 데이터를 한 화면에서 분석하는 대시보드</h2>
+    <section class="section home-project" id="projects">
+      <div class="container featured-project reveal">
+        <div>
+          <p class="eyebrow">대표 프로젝트</p>
+          <h2>AI 이동 로봇 운영 플랫폼</h2>
+          <p class="section-copy">비전 AI, 센서 데이터, 자율주행 경로를 통합해 현장 로봇이 작업 상태를 인식하고 이동할 수 있도록 설계합니다.</p>
         </div>
-        <div class="data-layout reveal">
-          <article class="analytics-panel">
-            <div class="panel-header">
-              <div>
-                <span>실시간 설비 분석</span>
-                <strong>라인 A-03</strong>
-              </div>
-              <em>정상 운전</em>
-            </div>
-            <div class="kpi-row">
-              <div>
-                <span>진동</span>
-                <strong>2.4mm/s</strong>
-              </div>
-              <div>
-                <span>온도</span>
-                <strong>38.2℃</strong>
-              </div>
-              <div>
-                <span>부하율</span>
-                <strong>71%</strong>
-              </div>
-            </div>
-            <div class="line-chart" aria-hidden="true">
-              <svg viewBox="0 0 420 170" role="img" aria-label="센서 변화 그래프">
-                <defs>
-                  <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#3FFFD7" stop-opacity="0.35"></stop>
-                    <stop offset="100%" stop-color="#3FFFD7" stop-opacity="0"></stop>
-                  </linearGradient>
-                </defs>
-                <path class="chart-area" d="M0 130 C38 92 72 126 108 82 S178 66 214 98 288 134 326 72 386 50 420 38 L420 170 L0 170 Z"></path>
-                <path class="chart-line" d="M0 130 C38 92 72 126 108 82 S178 66 214 98 288 134 326 72 386 50 420 38"></path>
-              </svg>
-            </div>
-          </article>
-          <article class="table-panel">
-            <div class="panel-header">
-              <div>
-                <span>AI 분석 로그</span>
-                <strong>최근 분석 결과</strong>
-              </div>
-              <em>업데이트 중</em>
-            </div>
-            <div class="data-table">
-              <div class="table-row table-head">
-                <span>항목</span>
-                <span>상태</span>
-                <span>조치</span>
-              </div>
-              <div class="table-row">
-                <span>모터 진동</span>
-                <span class="ok">안정</span>
-                <span>유지</span>
-              </div>
-              <div class="table-row">
-                <span>카메라 검사</span>
-                <span class="warn">주의</span>
-                <span>모델 보정</span>
-              </div>
-              <div class="table-row">
-                <span>로봇 경로</span>
-                <span class="ok">정상</span>
-                <span>자동</span>
-              </div>
-              <div class="table-row">
-                <span>센서 누락</span>
-                <span class="risk">확인</span>
-                <span>점검</span>
-              </div>
-            </div>
-          </article>
-        </div>
+        <a class="btn btn-secondary" href="./platform.html">운영 화면 보기</a>
       </div>
     </section>
 
-    <section class="section" id="solutions">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">솔루션</p>
-          <h2>데이터 분석에서 로봇 자동화까지 이어지는 산업 AI 솔루션</h2>
+    <section class="section platform-teaser" id="platform-preview">
+      <div class="container platform-teaser-card reveal">
+        <div>
+          <p class="eyebrow">운영 플랫폼 미리보기</p>
+          <h2>NeuraMotion OS</h2>
+          <p>로봇 운영, 비전 AI 감지, 센서 데이터, 자율주행 경로를 탭 구조로 확인할 수 있습니다.</p>
         </div>
-        <div class="card-grid">
-          <article class="solution-card reveal">
-            <div class="card-icon">AI</div>
-            <h3>AI 데이터 분석</h3>
-            <p>기계, 센서, 공정 데이터를 분석해 이상 패턴과 개선 지점을 찾습니다.</p>
-            <div class="card-signal" aria-hidden="true"><span></span><span></span><span></span></div>
-          </article>
-          <article class="solution-card reveal">
-            <div class="card-icon">RX</div>
-            <h3>로봇 자동화</h3>
-            <p>반복 작업과 이동, 분류, 검사 흐름을 로봇 자동화 시스템으로 설계합니다.</p>
-            <div class="card-signal" aria-hidden="true"><span></span><span></span><span></span></div>
-          </article>
-          <article class="solution-card reveal">
-            <div class="card-icon">PM</div>
-            <h3>AI 고장 예측</h3>
-            <p>설비 데이터를 분석해 고장 가능성을 미리 예측하고 정비 시점과 비용을 줄입니다.</p>
-            <div class="card-signal" aria-hidden="true"><span></span><span></span><span></span></div>
-          </article>
-          <article class="solution-card reveal">
-            <div class="card-icon">CV</div>
-            <h3>비전 AI 시스템</h3>
-            <p>검출, 분류, 추적, 품질 검사에 최적화된 비전 AI 파이프라인을 구축합니다.</p>
-            <div class="card-signal" aria-hidden="true"><span></span><span></span><span></span></div>
-          </article>
-          <article class="solution-card reveal">
-            <div class="card-icon">AR</div>
-            <h3>자율주행 로봇</h3>
-            <p>지도 작성, 라이다, 제어 알고리즘을 결합해 자율 이동 플랫폼을 구현합니다.</p>
-            <div class="card-signal" aria-hidden="true"><span></span><span></span><span></span></div>
-          </article>
-          <article class="solution-card reveal">
-            <div class="card-icon">AC</div>
-            <h3>AI 도입 컨설팅</h3>
-            <p>도입 과제 선정부터 시범 적용, 모델 운영, 자동화 확장 전략까지 지원합니다.</p>
-            <div class="card-signal" aria-hidden="true"><span></span><span></span><span></span></div>
-          </article>
+        <div class="teaser-status" aria-label="운영 플랫폼 상태">
+          <span>AI 추론 정상</span>
+          <span>로봇 제어 활성화</span>
+          <span>센서 융합 안정</span>
         </div>
+        <a class="btn btn-primary" href="./platform.html">운영 플랫폼 보기</a>
       </div>
     </section>
 
-    <section class="section alt-section" id="technology">
+    <!-- REQUIRED: 협업 게시판은 사용자 요청으로 반드시 유지합니다. -->
+    <section class="section hub-section required-board" id="hub">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">기술 구성</p>
-          <h2>현장 데이터와 로봇 제어를 하나의 자동화 시스템으로 엮는 기술</h2>
+          <p class="eyebrow">NeuraMotion 커뮤니티</p>
+          <h2>NeuraMotion AI의 기술과 프로젝트를 함께 공유하는 공간입니다.</h2>
+          <p class="small-note">로봇 자동화, 비전 AI, 센서 데이터, 자동화 아이디어에 대한 글을 자유롭게 작성할 수 있습니다.</p>
         </div>
-        <div class="tech-cloud reveal" aria-label="기술 카드">
-          <span>파이썬</span>
-          <span>머신러닝</span>
-          <span>컴퓨터 비전</span>
-          <span>객체 인식 모델</span>
-          <span>로봇 운영 시스템</span>
-          <span>동시 위치 추정 및 지도 작성</span>
-          <span>라이다 센서</span>
-          <span>마이크로컨트롤러</span>
-          <span>임베디드 컴퓨팅</span>
-          <span>데이터베이스</span>
-          <span>대시보드</span>
-          <span>센서 융합</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="robotics">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">로봇 기술</p>
-          <h2>로봇의 인식, 판단, 이동 과정을 AI로 고도화합니다.</h2>
-        </div>
-        <div class="robotics-panel reveal">
-          <div class="nm-robot-control" aria-label="로봇 운영 상태 패널">
-            <div class="nm-robot-control-head">
-              <span>ROBOT-CELL A03</span>
-              <strong>자율 이동 로봇 운영 패널</strong>
-              <i>정상 운전</i>
-            </div>
-            <div class="nm-robot-screen">
-              <div class="nm-camera-feed" aria-label="비전 AI 카메라 화면">
-                <div class="nm-panel-label"><span>Vision AI</span><strong>작업 구역 인식</strong></div>
-                <div class="nm-detection-target nm-target-worker"><span>작업자</span></div>
-                <div class="nm-detection-target nm-target-pallet"><span>팔레트</span></div>
-                <div class="nm-safe-zone">안전 구역</div>
-                <i class="nm-camera-scan"></i>
-              </div>
-              <div class="nm-robot-path-map" aria-label="자율 이동 로봇 경로 지도">
-                <div class="nm-panel-label"><span>Navigation</span><strong>AMR 경로 계획</strong></div>
-                <svg viewBox="0 0 320 190" aria-hidden="true">
-                  <path class="nm-map-grid-line" d="M32 46 H288 M32 96 H288 M32 146 H288 M78 24 V166 M158 24 V166 M238 24 V166"></path>
-                  <path class="nm-robot-path" d="M42 144 H92 V104 H156 V62 H266"></path>
-                  <rect class="nm-map-block" x="110" y="112" width="44" height="30" rx="5"></rect>
-                  <rect class="nm-map-block" x="202" y="38" width="42" height="28" rx="5"></rect>
-                  <circle class="nm-map-goal" cx="266" cy="62" r="7"></circle>
-                </svg>
-                <span class="nm-map-point nm-map-start">출발</span>
-                <span class="nm-map-point nm-map-goal-label">목표</span>
-                <span class="nm-amr-dot"><em>AMR</em></span>
-              </div>
-            </div>
-            <div class="nm-robot-status-grid">
-              <div><span>배터리</span><strong>87%</strong></div>
-              <div><span>현재 위치</span><strong>구역 C</strong></div>
-              <div><span>진행 작업</span><strong>지도 작성</strong></div>
-            </div>
-          </div>
-          <div class="robotics-cards">
-            <article>
-              <h3>비전 AI</h3>
-              <p>객체 인식, 결함 탐지, 작업자 안전 감지를 수행합니다.</p>
-            </article>
-            <article>
-              <h3>센서 융합</h3>
-              <p>카메라, 라이다, 관성 센서, 거리 센서를 통합해 환경을 해석합니다.</p>
-            </article>
-            <article>
-              <h3>자율주행 경로 계획</h3>
-              <p>지도 작성과 경로 계획으로 자율 이동을 구현합니다.</p>
-            </article>
-            <article>
-              <h3>실시간 제어</h3>
-              <p>제어 신호와 모델 추론을 실시간 동작으로 연결합니다.</p>
-            </article>
-            <article>
-              <h3>AI 의사결정 시스템</h3>
-              <p>상황 판단과 작업 우선순위를 자동화 제어로 연결합니다.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt-section" id="projects">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">프로젝트</p>
-          <h2>피지컬 AI가 현장에서 작동하는 방식</h2>
-        </div>
-        <div class="project-grid">
-          <article class="project-card reveal">
-            <span>01</span>
-            <h3>AI 쓰레기 수거 및 분류 로봇</h3>
-            <p>비전 인식과 로봇 이동 제어를 결합해 폐기물 감지, 접근, 분류를 자동화합니다.</p>
-          </article>
-          <article class="project-card reveal">
-            <span>02</span>
-            <h3>센서 데이터 기반 기계 상태 분석 시스템</h3>
-            <p>진동과 온도 데이터를 기반으로 설비 이상 징후를 시각화합니다.</p>
-          </article>
-          <article class="project-card reveal">
-            <span>03</span>
-            <h3>AI 기반 개발 방향성 추천 시스템</h3>
-            <p>프로젝트 목표와 데이터 상태를 분석해 적합한 기술 경로를 추천합니다.</p>
-          </article>
-          <article class="project-card reveal">
-            <span>04</span>
-            <h3>AI 이동 로봇 플랫폼</h3>
-            <p>로봇 운영 시스템, 지도 작성, 라이다 기반으로 실내외 이동 로봇 플랫폼을 설계합니다.</p>
-          </article>
-          <article class="project-card reveal">
-            <span>05</span>
-            <h3>비전 AI 스마트 모니터링</h3>
-            <p>카메라 기반 작업 모니터링과 이벤트 감지를 대시보드로 제공합니다.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section hub-section" id="hub">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">산업 AI 협업 공간</p>
-          <h2>로봇, 비전 AI, 센서 데이터를 함께 검토하는 산업 AI 협업 플랫폼</h2>
-          <p class="small-note">실험용 워크스페이스 · 실제 운영 환경에서는 권한 기반 데이터베이스와 연결됩니다.</p>
-        </div>
-
         <div class="hub-layout reveal">
           <aside class="hub-sidebar">
             <div class="hub-control">
-              <label for="postSearch">과제 검색</label>
-              <input id="postSearch" type="search" placeholder="프로젝트, 로봇, 센서 과제 검색">
+              <label for="postSearch">게시글 검색</label>
+              <input id="postSearch" type="search" placeholder="게시글, 프로젝트, 기술 질문 검색">
             </div>
             <div class="hub-control">
               <label for="categoryFilter">카테고리</label>
               <select id="categoryFilter">
                 <option value="all">전체 카테고리</option>
-                <option value="로봇 자동화">로봇 자동화</option>
-                <option value="비전 AI">비전 AI</option>
-                <option value="센서 데이터">센서 데이터</option>
-                <option value="도입 상담">도입 상담</option>
-                <option value="AI 고장 예측">AI 고장 예측</option>
+                <option value="공지사항">공지사항</option>
+                <option value="기술 질문">기술 질문</option>
+                <option value="프로젝트 공유">프로젝트 공유</option>
+                <option value="아이디어 제안">아이디어 제안</option>
+                <option value="피드백">피드백</option>
               </select>
             </div>
-            <button class="btn btn-primary full-btn" id="openPostModal" type="button">새 과제 등록</button>
+            <button class="btn btn-primary full-btn" id="openPostModal" type="button">새 글 작성</button>
             <div class="upload-demo">
               <label for="fileDemo">데이터 첨부 예시</label>
               <input id="fileDemo" type="file">
-              <p id="fileDemoName">데이터셋, 이미지, 로그 파일을 첨부할 수 있습니다.</p>
+              <p id="fileDemoName">이미지, 자료, 로그 파일을 첨부할 수 있습니다.</p>
             </div>
           </aside>
           <div class="hub-feed">
             <div class="feed-header">
-              <span id="postCount">과제 0개</span>
-              <button class="text-btn" id="resetDemoPosts" type="button">예시 과제 초기화</button>
+              <span id="postCount">게시글 0개</span>
+              <button class="text-btn" id="resetDemoPosts" type="button">게시글 비우기</button>
             </div>
             <div class="post-list" id="postList" aria-live="polite"></div>
           </div>
         </div>
       </div>
     </section>
-
-    <section class="section alt-section" id="process">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">진행 과정</p>
-          <h2>문제를 데이터로 해석하고 자동화 시스템으로 완성하는 흐름</h2>
-        </div>
-        <div class="process-line reveal">
-          <div class="process-step">
-            <span>01</span>
-            <h3>문제 분석</h3>
-            <p>문제 정의와 자동화 가능성을 분석합니다.</p>
-          </div>
-          <div class="process-step">
-            <span>02</span>
-            <h3>데이터 수집</h3>
-            <p>센서, 이미지, 제어 데이터를 수집합니다.</p>
-          </div>
-          <div class="process-step">
-            <span>03</span>
-            <h3>모델 설계</h3>
-            <p>AI 모델과 판단 로직을 설계합니다.</p>
-          </div>
-          <div class="process-step">
-            <span>04</span>
-            <h3>자동화 구현</h3>
-            <p>로봇, 대시보드, 제어 시스템과 연결합니다.</p>
-          </div>
-          <div class="process-step">
-            <span>05</span>
-            <h3>성능 개선</h3>
-            <p>현장 피드백으로 성능을 개선합니다.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section contact-section" id="contact">
-      <div class="container contact-grid reveal">
+      <div class="container contact-cta reveal">
         <div>
           <p class="eyebrow">문의</p>
-          <h2>프로젝트 문의와 자동화 상담을 시작하세요.</h2>
-          <p class="section-copy">
-            설비 데이터 분석, 비전 AI, 모바일 로봇, AI 고장 예측, AI 도입 방향성까지 NeuraMotion AI가 실행 가능한 첫 단계를 함께 설계합니다.
-          </p>
+          <h2>자동화가 필요한 현장 데이터를 알려주세요.</h2>
+          <p class="section-copy">설비 데이터, 로봇 운영, 비전 AI 검사, 센서 융합 과제를 바탕으로 실행 가능한 자동화 방향을 함께 설계합니다.</p>
         </div>
         <form class="contact-form" id="contactForm">
           <label>
@@ -504,7 +162,7 @@
           </label>
           <label>
             프로젝트 내용
-            <textarea name="message" rows="5" placeholder="문의하려는 자동화 과제를 적어주세요." required></textarea>
+            <textarea name="message" rows="4" placeholder="자동화가 필요한 현장이나 데이터를 적어주세요." required></textarea>
           </label>
           <button class="btn btn-primary" type="submit">문의 보내기</button>
           <p class="form-status" id="formStatus" role="status"></p>
@@ -524,38 +182,47 @@
     <div class="modal-backdrop" data-close-modal></div>
     <form class="modal-card" id="postForm">
       <div class="modal-header">
-        <h2 id="modalTitle">새 자동화 과제 등록</h2>
+        <h2 id="modalTitle">새 게시글 작성</h2>
         <button class="icon-btn" type="button" data-close-modal aria-label="창 닫기">×</button>
       </div>
       <label>
         제목
-        <input type="text" id="postTitle" placeholder="예: 비전 AI 검사 실증 문의" required>
+        <input type="text" id="postTitle" placeholder="예: 로봇 자동화 아이디어 공유" required>
       </label>
       <label>
         카테고리
         <select id="postCategory" required>
-          <option value="로봇 자동화">로봇 자동화</option>
-          <option value="비전 AI">비전 AI</option>
-          <option value="센서 데이터">센서 데이터</option>
-          <option value="도입 상담">도입 상담</option>
-          <option value="AI 고장 예측">AI 고장 예측</option>
+          <option value="공지사항">공지사항</option>
+          <option value="기술 질문">기술 질문</option>
+          <option value="프로젝트 공유">프로젝트 공유</option>
+          <option value="아이디어 제안">아이디어 제안</option>
+          <option value="피드백">피드백</option>
         </select>
       </label>
       <label>
         내용
-        <textarea id="postBody" rows="5" placeholder="공유할 과제, 데이터, 기대 결과를 적어주세요." required></textarea>
+        <textarea id="postBody" rows="5" placeholder="공유할 아이디어, 질문, 프로젝트 내용을 적어주세요." required></textarea>
       </label>
       <label>
         데이터 첨부 예시
         <input type="file" id="postFile">
       </label>
-      <button class="btn btn-primary" type="submit">과제 저장</button>
+      <button class="btn btn-primary" type="submit">게시글 저장</button>
     </form>
   </div>
-
   <script src="./script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 
