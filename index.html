@@ -203,10 +203,34 @@
         <textarea id="postBody" rows="5" placeholder="공유할 아이디어, 질문, 프로젝트 내용을 적어주세요." required></textarea>
       </label>
       <label>
+        비밀번호
+        <input type="password" id="postPassword" placeholder="수정·삭제용 비밀번호 4자 이상" minlength="4" required autocomplete="new-password">
+        <span class="field-help" id="postPasswordHelp">수정·삭제할 때 사용할 비밀번호입니다. 사이트 비밀번호와는 다릅니다.</span>
+      </label>
+      <label>
         데이터 첨부 예시
         <input type="file" id="postFile">
       </label>
       <button class="btn btn-primary" type="submit">게시글 저장</button>
+    </form>
+  </div>
+
+  <div class="modal" id="deleteModal" aria-hidden="true" role="dialog" aria-labelledby="deleteModalTitle">
+    <div class="modal-backdrop" data-close-delete-modal></div>
+    <form class="modal-card delete-modal-card" id="deleteForm">
+      <div class="modal-header">
+        <h2 id="deleteModalTitle">게시글 삭제</h2>
+        <button class="icon-btn" type="button" data-close-delete-modal aria-label="창 닫기">×</button>
+      </div>
+      <p class="modal-description">작성할 때 입력한 비밀번호를 입력하면 게시글을 삭제할 수 있습니다.</p>
+      <label>
+        비밀번호
+        <input type="password" id="deletePassword" placeholder="삭제용 비밀번호 입력" minlength="4" required autocomplete="current-password">
+      </label>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancelDeleteButton" type="button">취소</button>
+        <button class="btn btn-primary danger-btn" type="submit">삭제하기</button>
+      </div>
     </form>
   </div>
   <script type="module" src="./script.js"></script>

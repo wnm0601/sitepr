@@ -4,6 +4,9 @@ import {
   getFirestore,
   collection,
   addDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
   query,
   orderBy,
   onSnapshot,
@@ -32,6 +35,10 @@ const postSearch = document.getElementById("postSearch");
 const categoryFilter = document.getElementById("categoryFilter");
 const postModal = document.getElementById("postModal");
 const postForm = document.getElementById("postForm");
+const deleteModal = document.getElementById("deleteModal");
+const deleteForm = document.getElementById("deleteForm");
+const deletePasswordInput = document.getElementById("deletePassword");
+const cancelDeleteButton = document.getElementById("cancelDeleteButton");
 const openPostModal = document.getElementById("openPostModal");
 const resetDemoPosts = document.getElementById("resetDemoPosts");
 const fileDemo = document.getElementById("fileDemo");
@@ -55,6 +62,21 @@ const categoryMap = {
 let posts = [];
 let unsubscribePosts = null;
 let boardReady = false;
+let editingPostId = null;
+let pendingDeletePostId = null;
+
+async function hashPassword(password) {
+  const normalizedPassword = String(password || "").trim();
+  const encoded = new TextEncoder().encode(normalizedPassword);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", encoded);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function getPostById(postId) {
+  return posts.find((post) => post.id === postId);
+}
 
 function normalizeCategory(category) {
   return categoryMap[category] || category || "기술 질문";
@@ -133,6 +155,10 @@ function renderPosts() {
         </div>
         <h3>${escapeHtml(translateSavedText(post.title))}</h3>
         <p>${escapeHtml(translateSavedText(post.body))}</p>
+        <div class="post-actions" aria-label="게시글 관리">
+          <button class="post-action-btn" type="button" data-edit-post="${escapeHtml(post.id)}">수정</button>
+          <button class="post-action-btn danger" type="button" data-delete-post="${escapeHtml(post.id)}">삭제</button>
+        </div>
       </article>
     `;
   }).join("");
@@ -172,12 +198,35 @@ async function initializeFirebaseBoard() {
   }
 }
 
-function openModal() {
+function openModal(post = null) {
   if (!postModal || !postForm) return;
+
+  editingPostId = post?.id || null;
+  const titleInput = document.getElementById("postTitle");
+  const categoryInput = document.getElementById("postCategory");
+  const bodyInput = document.getElementById("postBody");
+  const passwordInput = document.getElementById("postPassword");
+  const modalTitle = document.getElementById("modalTitle");
+  const submitButton = postForm.querySelector('button[type="submit"]');
+  const passwordHelp = document.getElementById("postPasswordHelp");
+
+  postForm.reset();
+  if (titleInput) titleInput.value = post?.title || "";
+  if (categoryInput) categoryInput.value = normalizeCategory(post?.category || "기술 질문");
+  if (bodyInput) bodyInput.value = post?.body || "";
+  if (passwordInput) passwordInput.value = "";
+  if (modalTitle) modalTitle.textContent = editingPostId ? "게시글 수정" : "새 게시글 작성";
+  if (submitButton) submitButton.textContent = editingPostId ? "수정 저장" : "게시글 저장";
+  if (passwordHelp) {
+    passwordHelp.textContent = editingPostId
+      ? "작성할 때 입력한 비밀번호를 입력해야 수정할 수 있습니다."
+      : "수정·삭제할 때 사용할 비밀번호입니다. 사이트 비밀번호와는 다릅니다.";
+  }
+
   postModal.classList.add("open");
   postModal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  document.getElementById("postTitle")?.focus();
+  titleInput?.focus();
 }
 
 function closeModal() {
@@ -185,7 +234,72 @@ function closeModal() {
   postModal.classList.remove("open");
   postModal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+  editingPostId = null;
   postForm.reset();
+}
+
+function openDeleteModal(postId) {
+  if (!deleteModal || !deleteForm) {
+    deletePost(postId);
+    return;
+  }
+
+  pendingDeletePostId = postId;
+  deleteForm.reset();
+  deleteModal.classList.add("open");
+  deleteModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  deletePasswordInput?.focus();
+}
+
+function closeDeleteModal() {
+  if (!deleteModal || !deleteForm) return;
+  deleteModal.classList.remove("open");
+  deleteModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  pendingDeletePostId = null;
+  deleteForm.reset();
+}
+
+async function verifyPostPassword(post, password) {
+  if (!post?.passwordHash) {
+    alert("이전 게시글에는 비밀번호가 없어 수정/삭제할 수 없습니다. 새로 작성한 게시글부터 이용해주세요.");
+    return false;
+  }
+
+  if (!password || password.trim().length < 4) {
+    alert("비밀번호를 4자 이상 입력해주세요.");
+    return false;
+  }
+
+  const passwordHash = await hashPassword(password);
+  if (passwordHash !== post.passwordHash) {
+    alert("비밀번호가 일치하지 않습니다.");
+    return false;
+  }
+
+  return true;
+}
+
+async function deletePost(postId, password) {
+  const post = getPostById(postId);
+  if (!post) {
+    alert("게시글을 찾을 수 없습니다.");
+    return false;
+  }
+
+  const isVerified = await verifyPostPassword(post, password);
+  if (!isVerified) return false;
+
+  try {
+    await deleteDoc(doc(db, "posts", postId));
+    alert("게시글이 삭제되었습니다.");
+    return true;
+  } catch (error) {
+    console.error("게시글 삭제 실패:", error);
+    alert("게시글 삭제에 실패했습니다. Firestore Rules를 확인해주세요.");
+    return false;
+  }
 }
 
 window.addEventListener("scroll", () => {
@@ -240,9 +354,70 @@ if (postModal) postModal.addEventListener("click", (event) => {
   }
 });
 
+if (deleteModal) deleteModal.addEventListener("click", (event) => {
+  if (event.target.matches("[data-close-delete-modal]")) {
+    closeDeleteModal();
+  }
+});
+
+if (cancelDeleteButton) cancelDeleteButton.addEventListener("click", closeDeleteModal);
+
+if (postList) {
+  postList.addEventListener("click", (event) => {
+    const editButton = event.target.closest("[data-edit-post]");
+    const deleteButton = event.target.closest("[data-delete-post]");
+
+    if (editButton) {
+      const post = getPostById(editButton.dataset.editPost);
+      if (!post) {
+        alert("게시글을 찾을 수 없습니다.");
+        return;
+      }
+      openModal(post);
+      return;
+    }
+
+    if (deleteButton) {
+      openDeleteModal(deleteButton.dataset.deletePost);
+    }
+  });
+}
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && postModal && postModal.classList.contains("open")) {
     closeModal();
+  }
+
+  if (event.key === "Escape" && deleteModal && deleteModal.classList.contains("open")) {
+    closeDeleteModal();
+  }
+});
+
+if (deleteForm) deleteForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const password = deletePasswordInput?.value.trim() || "";
+  const submitButton = deleteForm.querySelector('button[type="submit"]');
+
+  if (!pendingDeletePostId) {
+    alert("삭제할 게시글을 찾을 수 없습니다.");
+    return;
+  }
+
+  if (!confirm("정말 이 게시글을 삭제할까요?")) return;
+
+  try {
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "삭제 중...";
+    }
+
+    const deleted = await deletePost(pendingDeletePostId, password);
+    if (deleted) closeDeleteModal();
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "삭제하기";
+    }
   }
 });
 
@@ -251,16 +426,24 @@ if (postForm) postForm.addEventListener("submit", async (event) => {
   const titleInput = document.getElementById("postTitle");
   const categoryInput = document.getElementById("postCategory");
   const bodyInput = document.getElementById("postBody");
+  const passwordInput = document.getElementById("postPassword");
   const fileInput = document.getElementById("postFile");
   const submitButton = postForm.querySelector('button[type="submit"]');
 
   const title = titleInput?.value.trim() || "";
   const category = categoryInput?.value || "기술 질문";
   const body = bodyInput?.value.trim() || "";
+  const password = passwordInput?.value.trim() || "";
   const file = fileInput?.files?.[0];
+  const currentEditingPost = editingPostId ? getPostById(editingPostId) : null;
 
   if (!title || !body) {
     alert("제목과 내용을 입력해주세요.");
+    return;
+  }
+
+  if (password.length < 4) {
+    alert("수정/삭제에 사용할 비밀번호를 4자 이상 입력해주세요.");
     return;
   }
 
@@ -272,26 +455,57 @@ if (postForm) postForm.addEventListener("submit", async (event) => {
   try {
     if (submitButton) {
       submitButton.disabled = true;
-      submitButton.textContent = "저장 중...";
+      submitButton.textContent = editingPostId ? "수정 중..." : "저장 중...";
     }
 
-    await addDoc(collection(db, "posts"), {
-      title,
-      category,
-      body,
-      fileName: file ? file.name : "",
-      uid: auth.currentUser.uid,
-      createdAt: serverTimestamp()
-    });
+    const passwordHash = await hashPassword(password);
+
+    if (editingPostId) {
+      if (!currentEditingPost) {
+        alert("수정할 게시글을 찾을 수 없습니다.");
+        return;
+      }
+
+      if (!currentEditingPost.passwordHash) {
+        alert("이전 게시글에는 비밀번호가 없어 수정할 수 없습니다. 새로 작성한 게시글부터 이용해주세요.");
+        return;
+      }
+
+      if (passwordHash !== currentEditingPost.passwordHash) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+
+      await updateDoc(doc(db, "posts", editingPostId), {
+        title,
+        category,
+        body,
+        fileName: file ? file.name : (currentEditingPost.fileName || ""),
+        passwordHash: currentEditingPost.passwordHash,
+        updatedAt: serverTimestamp()
+      });
+
+      alert("게시글이 수정되었습니다.");
+    } else {
+      await addDoc(collection(db, "posts"), {
+        title,
+        category,
+        body,
+        fileName: file ? file.name : "",
+        passwordHash,
+        uid: auth.currentUser.uid,
+        createdAt: serverTimestamp()
+      });
+    }
 
     closeModal();
   } catch (error) {
-    console.error("게시글 저장 실패:", error);
-    alert("게시글 저장에 실패했습니다. Firestore Rules와 네트워크 상태를 확인해주세요.");
+    console.error(editingPostId ? "게시글 수정 실패:" : "게시글 저장 실패:", error);
+    alert(editingPostId ? "게시글 수정에 실패했습니다. Firestore Rules를 확인해주세요." : "게시글 저장에 실패했습니다. Firestore Rules와 네트워크 상태를 확인해주세요.");
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
-      submitButton.textContent = "게시글 저장";
+      submitButton.textContent = editingPostId ? "수정 저장" : "게시글 저장";
     }
   }
 });
