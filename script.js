@@ -1,4 +1,29 @@
-﻿const header = document.getElementById("header");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyByGAmwh3wdEDMaeyUm3rQw7eJCXUMS5cc",
+  authDomain: "sitepre-95adc.firebaseapp.com",
+  projectId: "sitepre-95adc",
+  storageBucket: "sitepre-95adc.firebasestorage.app",
+  messagingSenderId: "112022806733",
+  appId: "1:112022806733:web:81f0f04a842233959b4984"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+
+const header = document.getElementById("header");
 const nav = document.getElementById("nav");
 const menuToggle = document.getElementById("menuToggle");
 const postList = document.getElementById("postList");
@@ -14,8 +39,6 @@ const fileDemoName = document.getElementById("fileDemoName");
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 
-const STORAGE_KEY = "neuramotion-hub-posts-preview";
-
 const categoryMap = {
   "Robotics": "프로젝트 공유",
   "Vision AI": "기술 질문",
@@ -29,12 +52,16 @@ const categoryMap = {
   "AI 고장 예측": "기술 질문"
 };
 
+let posts = [];
+let unsubscribePosts = null;
+let boardReady = false;
+
 function normalizeCategory(category) {
-  return categoryMap[category] || category;
+  return categoryMap[category] || category || "기술 질문";
 }
 
 function translateSavedText(value) {
-  return String(value)
+  return String(value ?? "")
     .replaceAll("Vision AI", "비전 AI")
     .replaceAll("Sensor Data", "센서 데이터")
     .replaceAll("Robotics", "로봇 자동화")
@@ -46,35 +73,8 @@ function translateSavedText(value) {
     .replaceAll("PoC", "실증");
 }
 
-const demoPosts = [];
-
-let posts = loadPosts();
-
-function loadPosts() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) {
-      localStorage.setItem(STORAGE_KEY, "[]");
-      return [];
-    }
-    return JSON.parse(saved).map((post) => ({
-      ...post,
-      title: translateSavedText(post.title),
-      body: translateSavedText(post.body),
-      category: normalizeCategory(post.category),
-      comments: (post.comments || []).map((comment) => translateSavedText(comment))
-    }));
-  } catch (error) {
-    return [];
-  }
-}
-
-function savePosts() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-}
-
 function escapeHtml(value) {
-  return value.replace(/[&<>"']/g, (char) => ({
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
@@ -83,56 +83,105 @@ function escapeHtml(value) {
   }[char]));
 }
 
+function formatPostDate(value) {
+  if (!value) return "방금 전";
+  try {
+    const date = typeof value.toDate === "function" ? value.toDate() : new Date(value);
+    if (Number.isNaN(date.getTime())) return "방금 전";
+    return date.toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" });
+  } catch (error) {
+    return "방금 전";
+  }
+}
+
+function showBoardMessage(message) {
+  if (postList) {
+    postList.innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
+  }
+}
+
 function renderPosts() {
   if (!postList || !postCount || !postSearch || !categoryFilter) return;
   const keyword = postSearch.value.trim().toLowerCase();
   const selectedCategory = categoryFilter.value;
+  const selectedNormalizedCategory = normalizeCategory(selectedCategory);
   const filtered = posts.filter((post) => {
     const category = normalizeCategory(post.category);
     const matchesKeyword = `${post.title} ${post.body} ${category}`.toLowerCase().includes(keyword);
-    const matchesCategory = selectedCategory === "all" || category === selectedCategory;
+    const matchesCategory = selectedCategory === "all" || category === selectedCategory || category === selectedNormalizedCategory;
     return matchesKeyword && matchesCategory;
   });
 
   postCount.textContent = `게시글 ${filtered.length}개`;
 
   if (!filtered.length) {
-    postList.innerHTML = '<div class="empty-state">검색 조건에 맞는 협업 글이 없습니다.</div>';
+    postList.innerHTML = '<div class="empty-state">검색 조건에 맞는 게시글이 없습니다.</div>';
     return;
   }
 
   postList.innerHTML = filtered.map((post) => {
-    const comments = post.comments.map((comment) => `<div>· ${escapeHtml(translateSavedText(comment))}</div>`).join("");
     const category = normalizeCategory(post.category);
-    const fileText = post.fileName ? "첨부 파일 있음" : "첨부 파일 없음";
+    const fileText = post.fileName ? `첨부: ${escapeHtml(post.fileName)}` : "첨부 파일 없음";
+    const createdAt = formatPostDate(post.createdAt);
 
     return `
-      <article class="post-card" data-post-id="${post.id}">
+      <article class="post-card" data-post-id="${escapeHtml(post.id)}">
         <div class="post-meta">
           <span class="category-pill">${escapeHtml(category)}</span>
-          <span>${escapeHtml(post.createdAt)}</span>
+          <span>${escapeHtml(createdAt)}</span>
           <span>${fileText}</span>
         </div>
         <h3>${escapeHtml(translateSavedText(post.title))}</h3>
         <p>${escapeHtml(translateSavedText(post.body))}</p>
-        <div class="comment-list">${comments || "<div>아직 댓글이 없습니다.</div>"}</div>
-        <form class="comment-box" data-comment-form>
-          <input type="text" placeholder="댓글을 입력하세요" aria-label="댓글 입력" required>
-          <button type="submit">댓글 등록</button>
-        </form>
       </article>
     `;
   }).join("");
 }
 
+function subscribePosts() {
+  if (!postList || unsubscribePosts) return;
+  showBoardMessage("게시글을 불러오는 중입니다...");
+  const postsQuery = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+  unsubscribePosts = onSnapshot(postsQuery, (snapshot) => {
+    posts = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      category: normalizeCategory(doc.data().category)
+    }));
+    boardReady = true;
+    renderPosts();
+  }, (error) => {
+    console.error("게시글 조회 실패:", error);
+    showBoardMessage("게시글을 불러오지 못했습니다. Firebase 설정과 보안 규칙을 확인해주세요.");
+  });
+}
+
+async function initializeFirebaseBoard() {
+  if (!postList) return;
+  showBoardMessage("Firebase 게시판에 연결하는 중입니다...");
+  try {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        subscribePosts();
+      }
+    });
+    await signInAnonymously(auth);
+  } catch (error) {
+    console.error("익명 로그인 실패:", error);
+    showBoardMessage("익명 로그인이 실패했습니다. Firebase Authentication의 Anonymous 사용 설정을 확인해주세요.");
+  }
+}
+
 function openModal() {
+  if (!postModal || !postForm) return;
   postModal.classList.add("open");
   postModal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  document.getElementById("postTitle").focus();
+  document.getElementById("postTitle")?.focus();
 }
 
 function closeModal() {
+  if (!postModal || !postForm) return;
   postModal.classList.remove("open");
   postModal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
@@ -197,55 +246,67 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-if (postForm) postForm.addEventListener("submit", (event) => {
+if (postForm) postForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const file = document.getElementById("postFile").files[0];
-  const newPost = {
-    id: `post-${Date.now()}`,
-    title: document.getElementById("postTitle").value.trim(),
-    category: document.getElementById("postCategory").value,
-    body: document.getElementById("postBody").value.trim(),
-    createdAt: new Date().toISOString().slice(0, 10),
-    fileName: file ? file.name : "",
-    comments: []
-  };
+  const titleInput = document.getElementById("postTitle");
+  const categoryInput = document.getElementById("postCategory");
+  const bodyInput = document.getElementById("postBody");
+  const fileInput = document.getElementById("postFile");
+  const submitButton = postForm.querySelector('button[type="submit"]');
 
-  posts = [newPost, ...posts];
-  savePosts();
-  if (postList && postCount && postSearch && categoryFilter) renderPosts();
-  closeModal();
-});
+  const title = titleInput?.value.trim() || "";
+  const category = categoryInput?.value || "기술 질문";
+  const body = bodyInput?.value.trim() || "";
+  const file = fileInput?.files?.[0];
 
-if (postList) postList.addEventListener("submit", (event) => {
-  if (!event.target.matches("[data-comment-form]")) {
+  if (!title || !body) {
+    alert("제목과 내용을 입력해주세요.");
     return;
   }
 
-  event.preventDefault();
-  const card = event.target.closest(".post-card");
-  const input = event.target.querySelector("input");
-  const post = posts.find((item) => item.id === card.dataset.postId);
-  const comment = input.value.trim();
-
-  if (!post || !comment) {
+  if (!auth.currentUser) {
+    alert("Firebase 로그인 연결 중입니다. 잠시 후 다시 시도해주세요.");
     return;
   }
 
-  post.comments.push(comment);
-  savePosts();
-  renderPosts();
+  try {
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "저장 중...";
+    }
+
+    await addDoc(collection(db, "posts"), {
+      title,
+      category,
+      body,
+      fileName: file ? file.name : "",
+      uid: auth.currentUser.uid,
+      createdAt: serverTimestamp()
+    });
+
+    closeModal();
+  } catch (error) {
+    console.error("게시글 저장 실패:", error);
+    alert("게시글 저장에 실패했습니다. Firestore Rules와 네트워크 상태를 확인해주세요.");
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "게시글 저장";
+    }
+  }
 });
 
 if (postSearch) postSearch.addEventListener("input", renderPosts);
 if (categoryFilter) categoryFilter.addEventListener("change", renderPosts);
 
-if (resetDemoPosts) resetDemoPosts.addEventListener("click", () => {
-  posts = [];
-  savePosts();
-  postSearch.value = "";
-  categoryFilter.value = "all";
-  renderPosts();
-});
+if (resetDemoPosts) {
+  resetDemoPosts.textContent = "새로고침";
+  resetDemoPosts.addEventListener("click", () => {
+    if (postSearch) postSearch.value = "";
+    if (categoryFilter) categoryFilter.value = "all";
+    renderPosts();
+  });
+}
 
 if (fileDemo) fileDemo.addEventListener("change", () => {
   const file = fileDemo.files[0];
@@ -257,6 +318,8 @@ if (contactForm) contactForm.addEventListener("submit", (event) => {
   formStatus.textContent = "문의가 접수된 것처럼 표시됩니다. 실제 전송 기능은 백엔드 연동 시 활성화됩니다.";
   contactForm.reset();
 });
+
+initializeFirebaseBoard();
 
 function setupNetworkCanvas() {
   const canvas = document.getElementById("networkCanvas");
@@ -407,7 +470,6 @@ function setupNetworkCanvas() {
 }
 
 setupNetworkCanvas();
-if (postList && postCount && postSearch && categoryFilter) renderPosts();
 
 // NeuraMotion OS Interface preview module
 function nmAnimateCount(element, duration) {
