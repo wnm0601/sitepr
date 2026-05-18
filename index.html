@@ -16,13 +16,11 @@
       <span>NeuraMotion AI</span>
     </a>
     <nav class="nav" id="nav" aria-label="주요 메뉴">
-      <a href="#about">소개</a>
+      <a href="#hero">홈</a>
       <a href="#solutions">솔루션</a>
-      <a href="#technology">기술</a>
-      <a href="#robotics">로봇 기술</a>
       <a href="#projects">프로젝트</a>
-      <a href="#hub">산업 AI 협업 공간</a>
-      <a href="#process">진행 과정</a>
+      <a href="#technology">기술</a>
+      <a href="./platform.html">운영 플랫폼</a>
       <a href="#contact">문의</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
@@ -41,7 +39,7 @@
       <div class="container hero-inner reveal">
         <div class="hero-text">
           <p class="eyebrow">산업 AI · 로봇공학 · 센서 데이터 분석</p>
-          <h1>AI로 산업 자동화의 방향을 설계합니다.</h1>
+          <h1>로봇과 산업을 위한 AI 자동화</h1>
           <p class="hero-slogan">현장 장비와 연결되는 피지컬 AI</p>
           <p class="hero-copy">
             로봇, 기계, 제어 시스템, 센서 데이터를 AI로 분석하여 자동화 방향을 제시하고 실제 구현 가능한 솔루션으로 연결합니다.
@@ -65,106 +63,32 @@
             </div>
           </div>
         </div>
-        <section class="hero-visual nm-os-interface" id="nm-os-interface" aria-label="NeuraMotion OS Interface">
-          <div class="nm-os-shell">
-            <div class="nm-os-head">
-              <div>
-                <p class="nm-os-kicker">NeuraMotion OS Interface</p>
-                <h2>NeuraMotion OS</h2>
-              </div>
-              <span class="nm-system-state"><i></i>시스템 정상</span>
-            </div>
-
-            <div class="nm-status-grid" aria-label="실시간 상태 카드">
-              <article class="nm-status-card">
-                <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>AI 추론</em></div>
-                <strong><span class="nm-count" data-nm-target="98.7" data-nm-decimals="1">0</span>%</strong>
-                <p>실시간 추론 안정</p>
-                <div class="nm-progress"><span style="--nm-width: 98%"></span></div>
-              </article>
-              <article class="nm-status-card">
-                <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>센서 융합</em></div>
-                <strong><span class="nm-count" data-nm-target="42">0</span></strong>
-                <p>센서 스트림 동기화</p>
-                <div class="nm-progress"><span style="--nm-width: 84%"></span></div>
-              </article>
-              <article class="nm-status-card">
-                <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>로봇 운영</em></div>
-                <strong><span class="nm-count" data-nm-target="12">0</span></strong>
-                <p>로봇 연결 상태</p>
-                <div class="nm-progress"><span style="--nm-width: 72%"></span></div>
-              </article>
-              <article class="nm-status-card">
-                <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>시스템 상태</em></div>
-                <strong>안정</strong>
-                <p>응답 지연 18ms</p>
-                <div class="nm-progress"><span style="--nm-width: 91%"></span></div>
-              </article>
-            </div>
-
-            <div class="nm-os-grid">
-              <article class="nm-panel nm-fleet-panel">
-                <div class="nm-panel-title"><span>로봇 운영 현황</span><em>실시간 운영</em></div>
-                <div class="nm-fleet-table">
-                  <div class="nm-fleet-row nm-fleet-head"><span>로봇 ID</span><span>상태</span><span>배터리</span><span>위치</span><span>작업</span></div>
-                  <div class="nm-fleet-row"><span>NM-A1</span><span><i class="nm-state-dot"></i>운영 중</span><span><b style="--nm-battery:87%"></b>87%</span><span>Factory A</span><span>지도 작성</span></div>
-                  <div class="nm-fleet-row"><span>NM-B2</span><span><i class="nm-state-dot nm-warn"></i>충전 중</span><span><b style="--nm-battery:42%"></b>42%</span><span>Dock</span><span>대기</span></div>
-                  <div class="nm-fleet-row"><span>NM-C3</span><span><i class="nm-state-dot"></i>스캔 중</span><span><b style="--nm-battery:91%"></b>91%</span><span>Zone C</span><span>감지</span></div>
-                </div>
-              </article>
-
-              <article class="nm-panel nm-vision-panel">
-                <div class="nm-panel-title"><span>비전 AI 감지</span><em>추적 고정</em></div>
-                <div class="nm-camera-view">
-                  <div class="nm-detection-box"><span>플라스틱 병</span></div>
-                  <div class="nm-scan-line"></div>
-                </div>
-                <dl class="nm-detect-stats">
-                  <div><dt>객체</dt><dd>플라스틱 병</dd></div>
-                  <div><dt>신뢰도</dt><dd><span class="nm-count" data-nm-target="98.4" data-nm-decimals="1">0</span>%</dd></div>
-                  <div><dt>거리</dt><dd>1.2m</dd></div>
-                  <div><dt>추적</dt><dd><i class="nm-track-pulse"></i>고정</dd></div>
-                </dl>
-              </article>
-
-              <article class="nm-panel nm-sensor-panel">
-                <div class="nm-panel-title"><span>센서 데이터 시각화</span><em>5개 채널</em></div>
-                <svg class="nm-wave" viewBox="0 0 360 120" aria-hidden="true">
-                  <path d="M0 74 C28 32 58 98 92 56 S152 32 184 68 244 100 276 48 332 38 360 58"></path>
-                  <path d="M0 92 C40 64 72 68 106 84 S174 104 212 62 282 36 360 76"></path>
-                </svg>
-                <div class="nm-streams">
-                  <span>라이다 120k pts/s</span><span>관성 센서 240Hz</span><span>카메라 30fps</span><span>모터 전류 18.2A</span><span>온도 38.2℃</span>
-                </div>
-              </article>
-
-              <article class="nm-panel nm-map-panel">
-                <div class="nm-panel-title"><span>자율주행 경로</span><em>경로 A</em></div>
-                <div class="nm-mini-map nm-factory-map">
-                  <div class="nm-map-zone zone-a">A</div>
-                  <div class="nm-map-zone zone-b">B</div>
-                  <div class="nm-map-zone zone-c">C</div>
-                  <div class="nm-map-obstacle obs-a">설비</div>
-                  <div class="nm-map-obstacle obs-b">적재</div>
-                  <svg viewBox="0 0 260 170" aria-hidden="true">
-                    <path class="nm-route" d="M28 132 H76 V94 H122 V58 H190 V36 H226"></path>
-                    <circle class="nm-map-point p1" cx="76" cy="94" r="4"></circle>
-                    <circle class="nm-map-point p2" cx="190" cy="36" r="4"></circle>
-                    <circle class="nm-map-target" cx="226" cy="36" r="7"></circle>
-                  </svg>
-                  <span class="nm-robot-dot"><em>R1</em></span>
-                  <span class="nm-map-label start">현재 위치</span>
-                  <span class="nm-map-label target">목표 지점</span>
-                </div>
-              </article>
-            </div>
-
-            <div class="nm-pipeline" aria-label="AI Pipeline Flow">
-              <span>분석</span><i></i><span>수집</span><i></i><span>모델링</span><i></i><span>자동화</span><i></i><span>개선</span>
-              <b></b>
-            </div>
+        <aside class="hero-visual os-preview-card" aria-label="NeuraMotion OS 미리보기">
+          <div class="os-preview-header">
+            <span>NeuraMotion OS</span>
+            <strong>AI 기반 로봇 운영 플랫폼</strong>
+            <em><i></i>정상 운전</em>
           </div>
-        </section>
+          <div class="os-preview-grid">
+            <article>
+              <span>AI 추론 상태</span>
+              <strong>98.7%</strong>
+              <p>실시간 분석 안정</p>
+            </article>
+            <article>
+              <span>로봇 제어 상태</span>
+              <strong>12대</strong>
+              <p>운영 장비 연결</p>
+            </article>
+            <article>
+              <span>센서 융합 상태</span>
+              <strong>42개</strong>
+              <p>데이터 스트림 동기화</p>
+            </article>
+          </div>
+          <a class="btn btn-primary os-preview-button" href="./platform.html">운영 플랫폼 보기</a>
+        </aside>
+
       </div>
     </section>
 
@@ -632,6 +556,8 @@
   <script src="./script.js"></script>
 </body>
 </html>
+
+
 
 
 

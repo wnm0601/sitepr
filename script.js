@@ -162,22 +162,26 @@ function closeModal() {
 }
 
 window.addEventListener("scroll", () => {
-  header.classList.toggle("scrolled", window.scrollY > 24);
+  if (header) header.classList.toggle("scrolled", window.scrollY > 24);
 });
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("open");
-  menuToggle.classList.toggle("active", isOpen);
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    menuToggle.classList.toggle("active", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+}
 
-nav.addEventListener("click", (event) => {
-  if (event.target.tagName === "A") {
-    nav.classList.remove("open");
-    menuToggle.classList.remove("active");
-    menuToggle.setAttribute("aria-expanded", "false");
-  }
-});
+if (nav && menuToggle) {
+  nav.addEventListener("click", (event) => {
+    if (event.target.tagName === "A") {
+      nav.classList.remove("open");
+      menuToggle.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
 
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -190,21 +194,21 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 
-openPostModal.addEventListener("click", openModal);
+if (openPostModal) openPostModal.addEventListener("click", openModal);
 
-postModal.addEventListener("click", (event) => {
+if (postModal) postModal.addEventListener("click", (event) => {
   if (event.target.matches("[data-close-modal]")) {
     closeModal();
   }
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && postModal.classList.contains("open")) {
+  if (event.key === "Escape" && postModal && postModal.classList.contains("open")) {
     closeModal();
   }
 });
 
-postForm.addEventListener("submit", (event) => {
+if (postForm) postForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const file = document.getElementById("postFile").files[0];
   const newPost = {
@@ -219,11 +223,11 @@ postForm.addEventListener("submit", (event) => {
 
   posts = [newPost, ...posts];
   savePosts();
-  renderPosts();
+  if (postList && postCount && postSearch && categoryFilter) renderPosts();
   closeModal();
 });
 
-postList.addEventListener("submit", (event) => {
+if (postList) postList.addEventListener("submit", (event) => {
   if (!event.target.matches("[data-comment-form]")) {
     return;
   }
@@ -243,10 +247,10 @@ postList.addEventListener("submit", (event) => {
   renderPosts();
 });
 
-postSearch.addEventListener("input", renderPosts);
-categoryFilter.addEventListener("change", renderPosts);
+if (postSearch) postSearch.addEventListener("input", renderPosts);
+if (categoryFilter) categoryFilter.addEventListener("change", renderPosts);
 
-resetDemoPosts.addEventListener("click", () => {
+if (resetDemoPosts) resetDemoPosts.addEventListener("click", () => {
   posts = [...demoPosts];
   savePosts();
   postSearch.value = "";
@@ -254,12 +258,12 @@ resetDemoPosts.addEventListener("click", () => {
   renderPosts();
 });
 
-fileDemo.addEventListener("change", () => {
+if (fileDemo) fileDemo.addEventListener("change", () => {
   const file = fileDemo.files[0];
   fileDemoName.textContent = file ? `${file.name} 선택됨` : "데이터셋, 이미지, 로그 파일을 첨부할 수 있습니다.";
 });
 
-contactForm.addEventListener("submit", (event) => {
+if (contactForm) contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
   formStatus.textContent = "문의가 접수된 것처럼 표시됩니다. 실제 전송 기능은 백엔드 연동 시 활성화됩니다.";
   contactForm.reset();
@@ -267,6 +271,7 @@ contactForm.addEventListener("submit", (event) => {
 
 function setupNetworkCanvas() {
   const canvas = document.getElementById("networkCanvas");
+  if (!canvas) return;
   const context = canvas.getContext("2d");
   const points = [];
   let width = 0;
@@ -413,7 +418,7 @@ function setupNetworkCanvas() {
 }
 
 setupNetworkCanvas();
-renderPosts();
+if (postList && postCount && postSearch && categoryFilter) renderPosts();
 
 // NeuraMotion OS Interface preview module
 function nmAnimateCount(element, duration) {
@@ -473,4 +478,22 @@ function nmInitOsInterface() {
 }
 
 nmInitOsInterface();
+
+
+
+function nmInitPlatformTabs() {
+  const tabs = document.querySelectorAll("[data-platform-tab]");
+  const panels = document.querySelectorAll("[data-platform-panel]");
+  if (!tabs.length || !panels.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.platformTab;
+      tabs.forEach((item) => item.classList.toggle("active", item === tab));
+      panels.forEach((panel) => panel.classList.toggle("active", panel.dataset.platformPanel === target));
+    });
+  });
+}
+
+nmInitPlatformTabs();
 
