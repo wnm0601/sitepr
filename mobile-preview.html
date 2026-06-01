@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuraMotion AI 모바일 미리보기</title>
+  <style>
+    :root {
+      --bg: #eef2f7;
+      --panel: rgba(255, 255, 255, 0.82);
+      --line: #d1d5db;
+      --text: #111827;
+      --muted: #6b7280;
+      --shadow: 0 28px 80px rgba(15, 23, 42, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.95), transparent 34%),
+        linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+      color: var(--text);
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+    }
+
+    .preview-shell {
+      width: min(100%, 1080px);
+      display: grid;
+      grid-template-columns: minmax(300px, 390px) 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .phone-frame {
+      width: min(100%, 390px);
+      aspect-ratio: 390 / 844;
+      margin: 0 auto;
+      padding: 12px;
+      border-radius: 42px;
+      background: linear-gradient(145deg, #ffffff, #d8dde5);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .phone-frame::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      width: 96px;
+      height: 24px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: #111827;
+      z-index: 2;
+      opacity: 0.92;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 32px;
+      background: #fff;
+      border: 1px solid rgba(17, 24, 39, 0.08);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+
+    .preview-info {
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--panel);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    .preview-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .preview-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .preview-actions a.primary {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .spec-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 860px) {
+      body { padding: 18px; }
+      .preview-shell { grid-template-columns: 1fr; }
+      .preview-info { order: -1; padding: 22px; border-radius: 22px; }
+      .phone-frame { max-height: 78vh; width: min(100%, 390px); }
+    }
+  </style>
+</head>
+<body>
+  <main class="preview-shell">
+    <section class="phone-frame" aria-label="모바일 화면 미리보기">
+      <div class="phone-screen">
+        <iframe src="./index.html?v=mobile-preview-frame#hero" title="NeuraMotion AI 모바일 미리보기"></iframe>
+      </div>
+    </section>
+
+    <section class="preview-info">
+      <p class="eyebrow">Mobile Preview</p>
+      <h1>핸드폰 화면 기준 미리보기</h1>
+      <p>왼쪽 프레임은 390px 폭 기준으로 메인 사이트를 보여줍니다. 실제 제출 전 모바일에서 글자 크기, 버튼, 카드, 커뮤니티 영역이 자연스럽게 보이는지 확인하기 위한 화면입니다.</p>
+      <div class="preview-actions">
+        <a class="primary" href="./index.html?v=mobile-preview-direct#hero">메인 직접 열기</a>
+        <a href="./platform.html?v=mobile-preview-direct">운영 플랫폼 직접 열기</a>
+      </div>
+      <div class="spec-list">
+        <span>기준 화면: 390 × 844</span>
+        <span>검토 대상: 홈, 솔루션, 프로젝트, 운영 플랫폼, 커뮤니티, 문의</span>
+        <span>주의: 프레임 안에서도 스크롤 가능합니다.</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

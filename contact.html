@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NeuraMotion AI 문의 - 산업 AI와 로봇 자동화 상담">
+  <title>문의 | NeuraMotion AI</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="sub-page contact-page">
+  <div class="site-noise" aria-hidden="true"></div>
+  <header class="header" id="header">
+    <a class="logo" href="./index.html#hero" aria-label="NeuraMotion AI 홈">
+      <span class="logo-mark"></span>
+      <span>NeuraMotion AI</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="주요 메뉴">
+      <a href="./index.html#hero">홈</a>
+      <a href="./index.html#solutions">솔루션</a>
+      <a href="./index.html#process">서비스 절차</a>
+      <a href="./index.html#projects">프로젝트</a>
+      <a href="./platform.html">운영 플랫폼</a>
+      <a href="./community.html">커뮤니티</a>
+      <a href="./contact.html" aria-current="page">문의</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <button class="mobile-menu-proxy" id="mobileMenuProxy" type="button" aria-label="모바일 메뉴 열기">메뉴</button>
+  </header>
+
+  <main>
+    <section class="section sub-hero contact-hero">
+      <div class="container reveal">
+        <p class="eyebrow">문의</p>
+        <h1>자동화 상담 문의</h1>
+        <p class="platform-lead">현장 데이터, 설비 상태, 비전 검사, 로봇 운영과 관련된 자동화 상담 내용을 남겨주세요.</p>
+      </div>
+    </section>
+    <section class="section contact-section" id="contact">
+      <div class="container contact-cta reveal">
+        <div>
+          <p class="eyebrow">상담 문의</p>
+          <h2>자동화가 필요한 현장 데이터를 알려주세요.</h2>
+          <p class="section-copy">관심 분야와 현장 상황을 남겨주시면 데이터 진단과 자동화 적용 방향을 기준으로 검토합니다.</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <label>
+            이름
+            <input type="text" name="name" placeholder="담당자 이름" required>
+          </label>
+          <label>
+            이메일
+            <input type="email" name="email" placeholder="이메일 주소 입력" required>
+          </label>
+          <label>
+            관심 분야
+            <select name="interest" required>
+              <option value="">관심 분야 선택</option>
+              <option value="설비 예지 진단">설비 예지 진단</option>
+              <option value="비전 AI 검사">비전 AI 검사</option>
+              <option value="로봇 운영 자동화">로봇 운영 자동화</option>
+              <option value="운영 플랫폼">운영 플랫폼</option>
+            </select>
+          </label>
+          <label>
+            프로젝트 내용
+            <textarea name="message" rows="4" placeholder="자동화가 필요한 공정, 설비, 데이터 종류를 간단히 적어주세요." required></textarea>
+          </label>
+          <button class="btn btn-primary contact-submit" type="submit">자동화 상담 요청</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>NeuraMotion AI</span>
+      <span>현장 장비와 연결되는 피지컬 AI</span>
+    </div>
+  </footer>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

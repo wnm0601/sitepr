@@ -29,6 +29,7 @@ const db = getFirestore(firebaseApp);
 const header = document.getElementById("header");
 const nav = document.getElementById("nav");
 const menuToggle = document.getElementById("menuToggle");
+const mobileMenuProxy = document.getElementById("mobileMenuProxy");
 const postList = document.getElementById("postList");
 const postCount = document.getElementById("postCount");
 const postSearch = document.getElementById("postSearch");
@@ -306,12 +307,24 @@ window.addEventListener("scroll", () => {
   if (header) header.classList.toggle("scrolled", window.scrollY > 24);
 });
 
+function toggleMobileMenu() {
+  if (!nav || !menuToggle) return;
+  const isOpen = nav.classList.toggle("open");
+  menuToggle.classList.toggle("active", isOpen);
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  if (mobileMenuProxy) {
+    mobileMenuProxy.classList.toggle("active", isOpen);
+    mobileMenuProxy.setAttribute("aria-expanded", String(isOpen));
+    mobileMenuProxy.textContent = isOpen ? "닫기" : "메뉴";
+  }
+}
+
 if (menuToggle && nav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("open");
-    menuToggle.classList.toggle("active", isOpen);
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-  });
+  menuToggle.addEventListener("click", toggleMobileMenu);
+}
+
+if (mobileMenuProxy && nav) {
+  mobileMenuProxy.addEventListener("click", toggleMobileMenu);
 }
 
 if (nav && menuToggle) {
@@ -320,6 +333,11 @@ if (nav && menuToggle) {
       nav.classList.remove("open");
       menuToggle.classList.remove("active");
       menuToggle.setAttribute("aria-expanded", "false");
+      if (mobileMenuProxy) {
+        mobileMenuProxy.classList.remove("active");
+        mobileMenuProxy.setAttribute("aria-expanded", "false");
+        mobileMenuProxy.textContent = "메뉴";
+      }
     }
   });
 }
