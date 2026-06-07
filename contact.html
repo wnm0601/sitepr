@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NeuraMotion AI 커뮤니티 - 로봇 자동화와 산업 AI 게시판">
-  <title>NeuraMotion 커뮤니티 | NeuraMotion AI</title>
-  <link rel="stylesheet" href="./style.css?v=community-logo-mark">
+  <meta name="description" content="NeuraMotion AI 문의 - 산업 AI와 로봇 자동화 상담">
+  <title>문의 | NeuraMotion AI</title>
+  <link rel="stylesheet" href="./style.css?v=contact-logo-mark">
 </head>
-<body class="sub-page community-page">
+<body class="sub-page contact-page">
   <div class="site-noise" aria-hidden="true"></div>
   <header class="header" id="header">
     <a class="logo" href="./index.html#hero" aria-label="NeuraMotion AI 홈">
@@ -39,8 +39,8 @@
           <a href="./index.html#process" role="menuitem">구축 절차</a>
         </div>
       </div>
-      <a href="./community.html" aria-current="page">커뮤니티</a>
-      <a href="./contact.html">문의</a>
+      <a href="./community.html">커뮤니티</a>
+      <a href="./contact.html" aria-current="page">문의</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
       <span></span>
@@ -51,53 +51,49 @@
   </header>
 
   <main>
-    <section class="section sub-hero community-hero">
+    <section class="section sub-hero contact-hero">
       <div class="container reveal">
-        <p class="eyebrow">커뮤니티</p>
-        <h1>NeuraMotion AI <br>커뮤니티</h1>
-        <p class="platform-lead">NeuraMotion AI의 기술과 대표 사례를 함께 공유하는 공간입니다. 로봇 자동화, 비전 AI, 센서 데이터, 자동화 아이디어에 대한 글을 자유롭게 작성할 수 있습니다.</p>
+        <p class="eyebrow">문의</p>
+        <h1 id="contactPageTitle">자동화 상담 문의</h1>
+        <p class="platform-lead" id="contactPageDescription">PoC, 구축형 솔루션, 운영 유지보수 등 필요한 도입 방식을 남겨주세요.</p>
       </div>
     </section>
-    <!-- REQUIRED: 협업 게시판은 사용자 요청으로 반드시 유지합니다. -->
-    <section class="section hub-section required-board" id="hub">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">커뮤니티</p>
-          <h2>NeuraMotion 커뮤니티</h2>
-          <p class="small-note">로봇 자동화, 비전 AI, 센서 데이터와 관련된 아이디어와 질문을 공유하는 게시판입니다.</p>
+    <section class="section contact-section" id="contact">
+      <div class="container contact-cta reveal">
+        <div>
+          <p class="eyebrow">상담 문의</p>
+          <h2 id="contactFormTitle">도입하고 싶은 자동화 방식을 알려주세요.</h2>
+          <p class="section-copy" id="contactFormDescription">관심 분야와 현장 상황을 남겨주시면 자동화 가능성과 적합한 도입 플랜을 검토합니다.</p>
         </div>
-        <div class="hub-layout reveal">
-          <aside class="hub-sidebar">
-            <div class="hub-control">
-              <label for="postSearch">게시글 검색</label>
-              <input id="postSearch" type="search" placeholder="게시글, 사례, 기술 질문 검색">
-            </div>
-            <div class="hub-control">
-              <label for="categoryFilter">카테고리</label>
-              <select id="categoryFilter">
-                <option value="all">전체 카테고리</option>
-                <option value="공지사항">공지사항</option>
-                <option value="기술 질문">기술 질문</option>
-                <option value="사례 공유">사례 공유</option>
-                <option value="아이디어 제안">아이디어 제안</option>
-                <option value="피드백">피드백</option>
-              </select>
-            </div>
-            <button class="btn btn-primary full-btn" id="openPostModal" type="button">새 글 작성</button>
-            <div class="upload-demo">
-              <label for="fileDemo">자료 첨부</label>
-              <input id="fileDemo" type="file">
-              <p id="fileDemoName">이미지, 자료, 로그 파일을 첨부할 수 있습니다.</p>
-            </div>
-          </aside>
-          <div class="hub-feed">
-            <div class="feed-header">
-              <span id="postCount">게시글 0개</span>
-              <button class="text-btn" id="resetDemoPosts" type="button">새로고침</button>
-            </div>
-            <div class="post-list" id="postList" aria-live="polite"></div>
-          </div>
-        </div>
+        <form class="contact-form" id="contactForm">
+          <label>
+            이름
+            <input type="text" name="name" placeholder="담당자 이름" required>
+          </label>
+          <label>
+            이메일
+            <input type="email" name="email" placeholder="이메일 주소 입력" required>
+          </label>
+          <label>
+            관심 분야
+            <select name="interest" id="contactInterest" required>
+              <option value="">관심 분야 선택</option>
+              <option value="PoC 문의">PoC 문의</option>
+              <option value="Build 문의">Build 문의</option>
+              <option value="Operation 문의">Operation 문의</option>
+              <option value="AI 비전 자동화">AI 비전 자동화</option>
+              <option value="로봇 제어 자동화">로봇 제어 자동화</option>
+              <option value="센서 데이터 분석">센서 데이터 분석</option>
+              <option value="NeuraMotion OS 도입 문의">NeuraMotion OS 도입 문의</option>
+            </select>
+          </label>
+          <label>
+            상담 내용
+            <textarea name="message" id="contactMessage" rows="4" placeholder="현장 환경, 장비 구성, 데이터 상태, 원하는 자동화 범위를 간단히 적어주세요." required></textarea>
+          </label>
+          <button class="btn btn-primary contact-submit" type="submit">도입 상담 요청</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
       </div>
     </section>
   </main>
@@ -158,62 +154,6 @@
     </div>
   </footer>
 
-  <div class="modal" id="postModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
-    <div class="modal-backdrop" data-close-modal></div>
-    <form class="modal-card" id="postForm">
-      <div class="modal-header">
-        <h2 id="modalTitle">새 게시글 작성</h2>
-        <button class="icon-btn" type="button" data-close-modal aria-label="창 닫기">×</button>
-      </div>
-      <label>
-        제목
-        <input type="text" id="postTitle" placeholder="예: 로봇 자동화 아이디어 공유" required>
-      </label>
-      <label>
-        카테고리
-        <select id="postCategory" required>
-          <option value="공지사항">공지사항</option>
-          <option value="기술 질문">기술 질문</option>
-          <option value="사례 공유">사례 공유</option>
-          <option value="아이디어 제안">아이디어 제안</option>
-          <option value="피드백">피드백</option>
-        </select>
-      </label>
-      <label>
-        내용
-        <textarea id="postBody" rows="5" placeholder="공유할 아이디어, 질문, 자동화 사례 내용을 적어주세요." required></textarea>
-      </label>
-      <label>
-        비밀번호
-        <input type="password" id="postPassword" placeholder="수정·삭제용 비밀번호 4자 이상" minlength="4" required autocomplete="new-password">
-        <span class="field-help" id="postPasswordHelp">수정·삭제할 때 사용할 비밀번호입니다. 사이트 비밀번호와는 다릅니다.</span>
-      </label>
-      <label>
-        자료 첨부
-        <input type="file" id="postFile">
-      </label>
-      <button class="btn btn-primary" type="submit">게시글 저장</button>
-    </form>
-  </div>
-
-  <div class="modal" id="deleteModal" aria-hidden="true" role="dialog" aria-labelledby="deleteModalTitle">
-    <div class="modal-backdrop" data-close-delete-modal></div>
-    <form class="modal-card delete-modal-card" id="deleteForm">
-      <div class="modal-header">
-        <h2 id="deleteModalTitle">게시글 삭제</h2>
-        <button class="icon-btn" type="button" data-close-delete-modal aria-label="창 닫기">×</button>
-      </div>
-      <p class="modal-description">작성할 때 입력한 비밀번호를 입력하면 게시글을 삭제할 수 있습니다.</p>
-      <label>
-        비밀번호
-        <input type="password" id="deletePassword" placeholder="삭제용 비밀번호 입력" minlength="4" required autocomplete="current-password">
-      </label>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" id="cancelDeleteButton" type="button">취소</button>
-        <button class="btn btn-primary danger-btn" type="submit">삭제하기</button>
-      </div>
-    </form>
-  </div>
   <script src="./local-ui.js?v=hero-cycle-local-fallback"></script>
   <script type="module" src="./script.js"></script>
 </body>
