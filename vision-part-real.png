@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" fill="none">
+<rect width="1200" height="780" rx="36" fill="#F8FAFC"/>
+<rect x="44" y="44" width="1112" height="692" rx="28" fill="white" stroke="#D9E3F0"/>
+<rect x="90" y="96" width="1020" height="160" rx="24" fill="#F8FAFC" stroke="#D9E3F0"/>
+<rect x="136" y="138" width="186" height="76" rx="22" fill="#DBEAFE"/><rect x="362" y="138" width="186" height="76" rx="22" fill="#D1FAE5"/><rect x="588" y="138" width="186" height="76" rx="22" fill="#FEE2E2"/><rect x="814" y="138" width="250" height="76" rx="22" fill="#EEF2FF"/>
+<rect x="132" y="310" width="470" height="360" rx="24" fill="#F8FAFC" stroke="#D9E3F0"/>
+<path d="M178 592h374" stroke="#E2E8F0" stroke-width="4"/><path d="M178 536h374" stroke="#E2E8F0" stroke-width="4"/><path d="M178 480h374" stroke="#E2E8F0" stroke-width="4"/><path d="M178 424h374" stroke="#E2E8F0" stroke-width="4"/>
+<path d="M194 576L266 544L336 558L418 470L520 396" stroke="#10B981" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="194" cy="576" r="10" fill="#10B981"/><circle cx="266" cy="544" r="10" fill="#10B981"/><circle cx="336" cy="558" r="10" fill="#10B981"/><circle cx="418" cy="470" r="10" fill="#10B981"/><circle cx="520" cy="396" r="10" fill="#10B981"/>
+<rect x="642" y="310" width="468" height="168" rx="24" fill="#F8FAFC" stroke="#D9E3F0"/>
+<rect x="690" y="360" width="118" height="68" rx="18" fill="#FFFFFF" stroke="#D9E3F0"/><rect x="826" y="360" width="118" height="68" rx="18" fill="#FFFFFF" stroke="#D9E3F0"/><rect x="962" y="360" width="100" height="68" rx="18" fill="#DBEAFE"/>
+<rect x="642" y="502" width="468" height="168" rx="24" fill="#F8FAFC" stroke="#D9E3F0"/>
+<rect x="692" y="544" width="332" height="20" rx="10" fill="#CBD5E1"/><rect x="692" y="586" width="284" height="20" rx="10" fill="#E2E8F0"/>
+<circle cx="1038" cy="576" r="24" fill="#10B981"/><path d="M1028 576l7 7 14-16" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>

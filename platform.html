@@ -1,217 +1,263 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NeuraMotion OS - AI 인식, 센서 데이터, 로봇 제어를 통합 관리하는 운영 플랫폼">
-  <title>NeuraMotion OS | 운영 플랫폼</title>
-  <link rel="stylesheet" href="./style.css?v=business-model-polish">
-  <link rel="stylesheet" href="./platform-tabs-visual-test.css?v=platform-tabs-applied">
-</head>
-<body class="platform-page">
-  <div class="site-noise" aria-hidden="true"></div>
-  <header class="header" id="header">
-    <a class="logo" href="./index.html#hero" aria-label="NeuraMotion AI 홈">
-      <span class="logo-mark"></span>
-      <span>NeuraMotion AI</span>
-    </a>
-        <nav class="nav" id="nav" aria-label="주요 메뉴">
-      <a href="./index.html#hero">홈</a>
-      <div class="nav-group">
-        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">솔루션·제품 <span class="nav-chevron">▾</span></button>
-        <div class="nav-dropdown" role="menu">
-          <a href="./index.html#solutions" role="menuitem">핵심 솔루션</a>
-          <a href="./index.html#products" role="menuitem">제품 라인업</a>
-          <a href="./platform.html" aria-current="page" role="menuitem">운영 플랫폼</a>
-        </div>
-      </div>
-      <div class="nav-group">
-        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">사례·도입 <span class="nav-chevron">▾</span></button>
-        <div class="nav-dropdown" role="menu">
-          <a href="./index.html#projects" role="menuitem">대표 사례</a>
-          <a href="./index.html#plans" role="menuitem">도입 플랜</a>
-          <a href="./index.html#process" role="menuitem">구축 절차</a>
-        </div>
-      </div>
-      <a href="./community.html">커뮤니티</a>
-      <a href="./contact.html">문의</a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <button class="mobile-menu-proxy" id="mobileMenuProxy" type="button" aria-label="모바일 메뉴 열기">메뉴</button>
-  </header>
+/* Local UI fallback for NeuraMotion AI
+   Keeps hero/menu/accordion animations working even if remote Firebase module imports are blocked. */
+(function () {
+  if (window.__nmLocalUiLoaded) return;
+  window.__nmLocalUiLoaded = true;
 
-  <main>
-    <section class="section platform-hero platform-v2-hero" id="platform">
-      <div class="container platform-v2-hero-grid reveal">
-        <div class="platform-v2-copy">
-          <p class="eyebrow">운영 플랫폼</p>
-          <h1>AI 인식, 센서, 로봇 제어를 통합 관리합니다.</h1>
-          <p class="platform-lead">NeuraMotion OS는 AI 비전 검사, 센서 데이터, 로봇 상태, 작업 흐름을 하나의 화면에서 관리하는 통합 운영 플랫폼입니다.</p>
-          <div class="platform-v2-actions">
-            <a class="btn btn-primary" href="#nm-os-interface">플랫폼 화면 보기</a>
-            <a class="btn btn-secondary" href="./contact.html">도입 상담하기</a>
-          </div>
-        </div>      </div>
-    </section>
+  function initHeroCycle() {
+    if (window.__nmHeroCycleActive) return;
+    const hero = document.querySelector('[data-smart-main-hero]');
+    if (!hero) return;
 
-    <section class="section platform-workspace platform-v2-workspace" id="nm-os-interface">
-      <div class="container">
-        <section class="tabs-shell" aria-label="NeuraMotion OS 운영 플랫폼">
-          <div class="tabs-header reveal">
-            <p>NeuraMotion OS</p>
-            <h1>NeuraMotion OS</h1>
-            <span><i></i> AI·센서·로봇 통합 운영</span>
-          </div>
+    const status = hero.querySelector('#smartHeroStatus');
+    const core = hero.querySelector('#smartHeroCore');
+    const nodes = Array.from(hero.querySelectorAll('[data-smart-step]'));
+    const minis = Array.from(hero.querySelectorAll('[data-smart-mini]'));
+    if (!status || !core || !nodes.length) return;
 
-          <div class="tabs-nav reveal" role="tablist" aria-label="운영 플랫폼 화면 선택">
-            <button class="active" type="button" data-panel="fleet">로봇 운영</button>
-            <button type="button" data-panel="vision">비전 AI</button>
-            <button type="button" data-panel="sensor">센서 데이터</button>
-          </div>
+    window.__nmHeroCycleActive = true;
 
-          <section class="tabs-panel active" data-panel="fleet">
-            <div class="visual-card fleet-visual fleet-real-dashboard reveal">
-              <div class="visual-copy">
-                <span>Robot Fleet</span>
-                <h2>로봇 운영 현황</h2>
-                <p>로봇 상태와 작업 위치를 한눈에 확인합니다.</p>
-              </div>
-              <div class="real-image fleet-image" aria-label="공장 내 이동 로봇 운영 화면">
-                <span class="fleet-live-dot dot-a"></span>
-                <span class="fleet-live-dot dot-b"></span>
-                <article class="fleet-overlay-card fleet-card-a"><strong>NM-A1</strong><span>운영 중</span><em>구역 A</em></article>
-                <article class="fleet-overlay-card fleet-card-b"><strong>NM-C3</strong><span>검사 중</span><em>구역 C</em></article>
-              </div>
-              <div class="fleet-list">
-                <article><strong>NM-A1</strong><span>운영 중 · 구역 A</span><b style="--value:87%"></b></article>
-                <article><strong>NM-B2</strong><span>충전 중 · 도크</span><b style="--value:42%"></b></article>
-                <article><strong>NM-C3</strong><span>검사 중 · 구역 C</span><b style="--value:91%"></b></article>
-              </div>
-              <span class="scan-glow"></span>
-            </div>
-          </section>
+    const steps = [
+      { text: '<b>카메라·센서 데이터</b>로 현장을 인식합니다.', core: 'Collect' },
+      { text: '<b>AI 비전</b>이 작업 대상을 판정합니다.', core: 'Inspect' },
+      { text: '<b>로봇 제어</b>로 반복 작업을 실행합니다.', core: 'Execute' },
+      { text: '<b>운영 플랫폼</b>에서 상태를 관리합니다.', core: 'Optimize' }
+    ];
 
-          <section class="tabs-panel" data-panel="vision">
-            <div class="visual-card vision-visual vision-real-dashboard reveal">
-              <div class="visual-copy">
-                <span>Vision AI</span>
-                <h2>부품 검사 판정</h2>
-                <p>카메라 인식 결과와 검사 판정을 표시합니다.</p>
-              </div>
-              <div class="vision-layout">
-                <div class="vision-camera-panel">
-                  <div class="vision-part-photo"><span class="detect"></span><span class="scan"></span><b>OK</b></div>
-                  <div class="vision-mini-metrics"><span>검출 완료</span><span>결함 없음</span><span>120ms</span></div>
-                </div>
-                <article class="vision-result"><span>검사 결과</span><strong>정상</strong><em>신뢰도 98.6%</em><i></i><small>검사 시간 120 ms</small></article>
-              </div>
-            </div>
-          </section>
+    let index = 0;
+    let timer = 0;
 
-          <section class="tabs-panel" data-panel="sensor">
-            <div class="visual-card sensor-visual reveal">
-              <div class="visual-copy">
-                <span>Sensor Data</span>
-                <h2>센서 데이터를 AI 판단으로 연결합니다.</h2>
-                <p>LiDAR, IMU, 전류, 온도 신호를 통합 분석합니다.</p>
-              </div>
-              <div class="real-image sensor-image" aria-hidden="true"></div>
-              <div class="wave-board sensor-dashboard">
-                <div class="sensor-board-head">
-                  <strong>실시간 센서 통합</strong>
-                  <span>AI 입력 신호</span>
-                </div>
-                <div class="sensor-board-grid">
-                  <div class="sensor-chart" aria-hidden="true">
-                    <svg viewBox="0 0 620 220">
-                      <line x1="0" y1="44" x2="620" y2="44" />
-                      <line x1="0" y1="88" x2="620" y2="88" />
-                      <line x1="0" y1="132" x2="620" y2="132" />
-                      <line x1="0" y1="176" x2="620" y2="176" />
-                      <path class="signal-fill" d="M0 154 C70 120 124 128 178 94 C238 56 298 70 352 118 C410 170 478 164 620 84 L620 220 L0 220 Z" />
-                      <path class="sensor-line lidar" d="M0 154 C70 120 124 128 178 94 C238 56 298 70 352 118 C410 170 478 164 620 84" />
-                      <path class="sensor-line imu" d="M0 176 C76 148 142 132 210 148 C290 168 356 188 430 126 C492 74 548 90 620 142" />
-                      <path class="sensor-line motor" d="M0 118 C78 112 126 138 190 122 C258 104 310 114 370 92 C452 62 516 76 620 58" />
-                      <circle class="signal-dot" cx="178" cy="94" r="6" />
-                      <circle class="signal-dot delay-a" cx="430" cy="126" r="6" />
-                      <circle class="signal-dot delay-b" cx="620" cy="58" r="6" />
-                    </svg>
-                  </div>
-                  <div class="sensor-readouts">
-                    <article><span>LiDAR</span><strong>안정</strong><i style="--v:92%"></i></article>
-                    <article><span>IMU</span><strong>정상</strong><i style="--v:88%"></i></article>
-                    <article><span>Camera</span><strong>30fps</strong><i style="--v:76%"></i></article>
-                    <article><span>Motor</span><strong>18.2A</strong><i style="--v:69%"></i></article>
-                  </div>
-                </div>
-                <div class="sensor-status-row">
-                  <span>동기화 완료</span><span>노이즈 보정</span><span>AI 분석 대기</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </section>
-      </div>
-    </section>
-  </main>
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="logo footer-logo" href="./index.html#hero" aria-label="NeuraMotion AI 홈">
-            <span class="logo-mark"></span>
-            <span>NeuraMotion AI</span>
-          </a>
-          <p class="footer-tagline">AI 비전·센서·로봇 제어를 결합해<br>고객 현장에 맞는 자동화 시스템을 구축합니다.</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-col">
-            <strong>솔루션</strong>
-            <a href="./index.html#solutions">핵심 솔루션</a>
-            <a href="./index.html#products">제품 라인업</a>
-            <a href="./platform.html">운영 플랫폼</a>
-          </div>
-          <div class="footer-col">
-            <strong>도입 안내</strong>
-            <a href="./index.html#projects">대표 사례</a>
-            <a href="./index.html#plans">도입 플랜</a>
-            <a href="./index.html#process">구축 절차</a>
-            <a href="./contact.html">도입 상담</a>
-          </div>
-          <div class="footer-col">
-            <strong>연락처</strong>
-            <a href="mailto:contact@neuramotion.ai">contact@neuramotion.ai</a>
-            <a href="tel:+82-2-0000-0000">02-0000-0000</a>
-            <span>서울특별시 강남구<br>테헤란로 123, 15층</span>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-legal">
-          <span>대표자: 김뉴라</span>
-          <span>사업자등록번호: 000-00-00000</span>
-          <span>통신판매업 신고번호: 2025-서울강남-0000</span>
-        </div>
-        <div class="footer-copy">
-          <span>© 2025 NeuraMotion AI. All rights reserved.</span>
-          <div class="footer-policy">
-            <a href="#">개인정보처리방침</a>
-            <a href="#">이용약관</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+    function render(next, instant) {
+      index = ((next % steps.length) + steps.length) % steps.length;
+      const update = function () {
+        status.innerHTML = steps[index].text;
+        core.textContent = steps[index].core;
+        nodes.forEach(function (node, nodeIndex) {
+          node.classList.toggle('active', nodeIndex === index);
+        });
+        minis.forEach(function (mini, miniIndex) {
+          mini.classList.toggle('on', miniIndex === index);
+        });
+        status.style.opacity = '1';
+        status.style.transform = 'translateY(0)';
+      };
 
-  <script src="./local-ui.js?v=hero-cycle-local-fallback"></script>
-  <script type="module" src="./script.js"></script>
-  <script src="./platform-tabs-visual-test.js?v=platform-tabs-applied"></script>
-</body>
-</html>
+      if (instant) {
+        update();
+        return;
+      }
 
+      status.style.opacity = '0';
+      status.style.transform = 'translateY(8px)';
+      window.setTimeout(update, 180);
+    }
 
+    function start() {
+      if (timer) return;
+      timer = window.setInterval(function () {
+        render(index + 1, false);
+      }, 2600);
+    }
 
+    function stop() {
+      if (!timer) return;
+      window.clearInterval(timer);
+      timer = 0;
+    }
 
+    nodes.forEach(function (node, nodeIndex) {
+      node.style.cursor = 'pointer';
+      node.addEventListener('click', function () {
+        render(nodeIndex, false);
+      });
+    });
 
+    render(0, true);
+    start();
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop();
+      else start();
+    });
+  }
+
+  function initNavDropdowns() {
+    if (window.__nmNavDropdownActive) return;
+    const groups = document.querySelectorAll('.nav-group');
+    if (!groups.length) return;
+    window.__nmNavDropdownActive = true;
+
+    groups.forEach(function (group) {
+      const toggle = group.querySelector('.nav-group-toggle');
+      const dropdown = group.querySelector('.nav-dropdown');
+      if (!toggle || !dropdown) return;
+
+      toggle.addEventListener('click', function (event) {
+        const isMobile = window.innerWidth <= 1080;
+        if (!isMobile) return;
+        event.preventDefault();
+        const isOpen = dropdown.style.display === 'flex';
+        dropdown.style.display = isOpen ? 'none' : 'flex';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1080) {
+        document.querySelectorAll('.nav-dropdown').forEach(function (dropdown) {
+          dropdown.style.display = '';
+        });
+        document.querySelectorAll('.nav-group-toggle').forEach(function (toggle) {
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    document.querySelectorAll('.nav-dropdown a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.querySelectorAll('.nav-dropdown').forEach(function (dropdown) {
+          dropdown.style.display = '';
+        });
+      });
+    });
+  }
+
+  function initAccordionCards() {
+    if (window.__nmAccordionCardsActive) return;
+    const groups = document.querySelectorAll('[data-accordion-group]');
+    if (!groups.length) return;
+    window.__nmAccordionCardsActive = true;
+
+    function closeCard(card) {
+      const trigger = card.querySelector('.accordion-card-trigger');
+      const panel = card.querySelector('.accordion-panel');
+      if (!trigger || !panel) return;
+      card.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+      window.setTimeout(function () {
+        if (!card.classList.contains('open')) panel.hidden = true;
+      }, 340);
+    }
+
+    function openCard(card) {
+      const trigger = card.querySelector('.accordion-card-trigger');
+      const panel = card.querySelector('.accordion-panel');
+      if (!trigger || !panel) return;
+      panel.hidden = false;
+      window.requestAnimationFrame(function () {
+        card.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      });
+    }
+
+    groups.forEach(function (group) {
+      const cards = Array.from(group.querySelectorAll('.accordion-card'));
+      cards.forEach(function (card) {
+        const trigger = card.querySelector('.accordion-card-trigger');
+        if (!trigger) return;
+        trigger.addEventListener('click', function () {
+          const isOpen = card.classList.contains('open');
+          cards.forEach(function (item) {
+            if (item !== card) closeCard(item);
+          });
+          if (isOpen) closeCard(card);
+          else openCard(card);
+        });
+      });
+    });
+  }
+
+  function initCompactProcess() {
+    if (window.__nmCompactProcessActive) return;
+    const pills = Array.from(document.querySelectorAll('[data-process-target]'));
+    const panels = Array.from(document.querySelectorAll('[data-process-panel]'));
+    if (!pills.length || !panels.length) return;
+    window.__nmCompactProcessActive = true;
+
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        const target = pill.dataset.processTarget;
+        pills.forEach(function (item) {
+          item.classList.toggle('active', item === pill);
+        });
+        panels.forEach(function (panel) {
+          const active = panel.dataset.processPanel === target;
+          panel.hidden = !active;
+          panel.classList.toggle('active', active);
+        });
+      });
+    });
+  }
+
+  function init() {
+    initHeroCycle();
+    initNavDropdowns();
+    initAccordionCards();
+    initCompactProcess();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
+
+// NeuraMotion AI - 2-second opening overlay
+// Add this to the bottom of local-ui.js or script.js.
+
+(function initNeuraOpening() {
+  const overlay = document.getElementById('nmOpening');
+  if (!overlay) return;
+
+  const skipButton = document.getElementById('nmOpeningSkip');
+  const storageKey = 'neuraMotionOpeningPlayed';
+
+  const closeOpening = () => {
+    overlay.classList.add('is-hidden');
+    document.body.classList.remove('nm-opening-active');
+
+    window.setTimeout(() => {
+      if (overlay && overlay.parentNode) {
+        overlay.parentNode.removeChild(overlay);
+      }
+    }, 420);
+  };
+
+  // 첫 방문 이후에는 사용성을 위해 바로 숨김
+  if (sessionStorage.getItem(storageKey) === 'true') {
+    overlay.remove();
+    return;
+  }
+
+  sessionStorage.setItem(storageKey, 'true');
+  document.body.classList.add('nm-opening-active');
+
+  const timer = window.setTimeout(closeOpening, 2050);
+
+  if (skipButton) {
+    skipButton.addEventListener('click', () => {
+      window.clearTimeout(timer);
+      closeOpening();
+    });
+  }
+})();
+
+(function initScrollTopButton() {
+  const button = document.querySelector('[data-scroll-top]');
+  if (!button) return;
+
+  const toggleButton = () => {
+    button.classList.toggle('is-visible', window.scrollY > 420);
+  };
+
+  button.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  window.addEventListener('scroll', toggleButton, { passive: true });
+  toggleButton();
+})();
