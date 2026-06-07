@@ -14,12 +14,24 @@
       <span class="logo-mark"></span>
       <span>NeuraMotion AI</span>
     </a>
-    <nav class="nav" id="nav" aria-label="주요 메뉴">
+        <nav class="nav" id="nav" aria-label="주요 메뉴">
       <a href="./index.html#hero">홈</a>
-      <a href="./index.html#solutions">솔루션</a>
-      <a href="./index.html#process">서비스 절차</a>
-      <a href="./index.html#projects">프로젝트</a>
-      <a href="./platform.html">운영 플랫폼</a>
+      <div class="nav-group">
+        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">솔루션·제품 <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="./index.html#solutions" role="menuitem">핵심 솔루션</a>
+          <a href="./index.html#products" role="menuitem">제품 라인업</a>
+          <a href="./platform.html" role="menuitem">운영 플랫폼</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">사례·도입 <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="./index.html#projects" role="menuitem">대표 사례</a>
+          <a href="./index.html#plans" role="menuitem">도입 플랜</a>
+          <a href="./index.html#process" role="menuitem">구축 절차</a>
+        </div>
+      </div>
       <a href="./community.html" aria-current="page">커뮤니티</a>
       <a href="./contact.html">문의</a>
     </nav>
@@ -36,7 +48,7 @@
       <div class="container reveal">
         <p class="eyebrow">커뮤니티</p>
         <h1>NeuraMotion<br>커뮤니티</h1>
-        <p class="platform-lead">NeuraMotion AI의 기술과 프로젝트를 함께 공유하는 공간입니다. 로봇 자동화, 비전 AI, 센서 데이터, 자동화 아이디어에 대한 글을 자유롭게 작성할 수 있습니다.</p>
+        <p class="platform-lead">NeuraMotion AI의 기술과 대표 사례를 함께 공유하는 공간입니다. 로봇 자동화, 비전 AI, 센서 데이터, 자동화 아이디어에 대한 글을 자유롭게 작성할 수 있습니다.</p>
       </div>
     </section>
     <!-- REQUIRED: 협업 게시판은 사용자 요청으로 반드시 유지합니다. -->
@@ -51,7 +63,7 @@
           <aside class="hub-sidebar">
             <div class="hub-control">
               <label for="postSearch">게시글 검색</label>
-              <input id="postSearch" type="search" placeholder="게시글, 프로젝트, 기술 질문 검색">
+              <input id="postSearch" type="search" placeholder="게시글, 사례, 기술 질문 검색">
             </div>
             <div class="hub-control">
               <label for="categoryFilter">카테고리</label>
@@ -59,14 +71,14 @@
                 <option value="all">전체 카테고리</option>
                 <option value="공지사항">공지사항</option>
                 <option value="기술 질문">기술 질문</option>
-                <option value="프로젝트 공유">프로젝트 공유</option>
+                <option value="사례 공유">사례 공유</option>
                 <option value="아이디어 제안">아이디어 제안</option>
                 <option value="피드백">피드백</option>
               </select>
             </div>
             <button class="btn btn-primary full-btn" id="openPostModal" type="button">새 글 작성</button>
             <div class="upload-demo">
-              <label for="fileDemo">데이터 첨부 예시</label>
+              <label for="fileDemo">자료 첨부</label>
               <input id="fileDemo" type="file">
               <p id="fileDemoName">이미지, 자료, 로그 파일을 첨부할 수 있습니다.</p>
             </div>
@@ -83,10 +95,52 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>NeuraMotion AI</span>
-      <span>현장 장비와 연결되는 피지컬 AI</span>
+    <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo footer-logo" href="./index.html#hero" aria-label="NeuraMotion AI 홈">
+            <span class="logo-mark"></span>
+            <span>NeuraMotion AI</span>
+          </a>
+          <p class="footer-tagline">AI 비전·센서·로봇 제어를 결합해<br>고객 현장에 맞는 자동화 시스템을 구축합니다.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <strong>솔루션</strong>
+            <a href="./index.html#solutions">핵심 솔루션</a>
+            <a href="./index.html#products">제품 라인업</a>
+            <a href="./platform.html">운영 플랫폼</a>
+          </div>
+          <div class="footer-col">
+            <strong>도입 안내</strong>
+            <a href="./index.html#projects">대표 사례</a>
+            <a href="./index.html#plans">도입 플랜</a>
+            <a href="./index.html#process">구축 절차</a>
+            <a href="./contact.html">도입 상담</a>
+          </div>
+          <div class="footer-col">
+            <strong>연락처</strong>
+            <a href="mailto:contact@neuramotion.ai">contact@neuramotion.ai</a>
+            <a href="tel:+82-2-0000-0000">02-0000-0000</a>
+            <span>서울특별시 강남구<br>테헤란로 123, 15층</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <span>대표자: 김뉴라</span>
+          <span>사업자등록번호: 000-00-00000</span>
+          <span>통신판매업 신고번호: 2025-서울강남-0000</span>
+        </div>
+        <div class="footer-copy">
+          <span>© 2025 NeuraMotion AI. All rights reserved.</span>
+          <div class="footer-policy">
+            <a href="#">개인정보처리방침</a>
+            <a href="#">이용약관</a>
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -106,14 +160,14 @@
         <select id="postCategory" required>
           <option value="공지사항">공지사항</option>
           <option value="기술 질문">기술 질문</option>
-          <option value="프로젝트 공유">프로젝트 공유</option>
+          <option value="사례 공유">사례 공유</option>
           <option value="아이디어 제안">아이디어 제안</option>
           <option value="피드백">피드백</option>
         </select>
       </label>
       <label>
         내용
-        <textarea id="postBody" rows="5" placeholder="공유할 아이디어, 질문, 프로젝트 내용을 적어주세요." required></textarea>
+        <textarea id="postBody" rows="5" placeholder="공유할 아이디어, 질문, 자동화 사례 내용을 적어주세요." required></textarea>
       </label>
       <label>
         비밀번호
@@ -121,7 +175,7 @@
         <span class="field-help" id="postPasswordHelp">수정·삭제할 때 사용할 비밀번호입니다. 사이트 비밀번호와는 다릅니다.</span>
       </label>
       <label>
-        데이터 첨부 예시
+        자료 첨부
         <input type="file" id="postFile">
       </label>
       <button class="btn btn-primary" type="submit">게시글 저장</button>
@@ -146,6 +200,7 @@
       </div>
     </form>
   </div>
+  <script src="./local-ui.js?v=hero-cycle-local-fallback"></script>
   <script type="module" src="./script.js"></script>
 </body>
 </html>

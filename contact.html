@@ -14,12 +14,24 @@
       <span class="logo-mark"></span>
       <span>NeuraMotion AI</span>
     </a>
-    <nav class="nav" id="nav" aria-label="주요 메뉴">
+        <nav class="nav" id="nav" aria-label="주요 메뉴">
       <a href="./index.html#hero">홈</a>
-      <a href="./index.html#solutions">솔루션</a>
-      <a href="./index.html#process">서비스 절차</a>
-      <a href="./index.html#projects">프로젝트</a>
-      <a href="./platform.html">운영 플랫폼</a>
+      <div class="nav-group">
+        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">솔루션·제품 <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="./index.html#solutions" role="menuitem">핵심 솔루션</a>
+          <a href="./index.html#products" role="menuitem">제품 라인업</a>
+          <a href="./platform.html" role="menuitem">운영 플랫폼</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">사례·도입 <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="./index.html#projects" role="menuitem">대표 사례</a>
+          <a href="./index.html#plans" role="menuitem">도입 플랜</a>
+          <a href="./index.html#process" role="menuitem">구축 절차</a>
+        </div>
+      </div>
       <a href="./community.html">커뮤니티</a>
       <a href="./contact.html" aria-current="page">문의</a>
     </nav>
@@ -35,16 +47,16 @@
     <section class="section sub-hero contact-hero">
       <div class="container reveal">
         <p class="eyebrow">문의</p>
-        <h1>자동화 상담 문의</h1>
-        <p class="platform-lead">현장 데이터, 설비 상태, 비전 검사, 로봇 운영과 관련된 자동화 상담 내용을 남겨주세요.</p>
+        <h1 id="contactPageTitle">자동화 상담 문의</h1>
+        <p class="platform-lead" id="contactPageDescription">PoC, 구축형 솔루션, 운영 유지보수 등 필요한 도입 방식을 남겨주세요.</p>
       </div>
     </section>
     <section class="section contact-section" id="contact">
       <div class="container contact-cta reveal">
         <div>
           <p class="eyebrow">상담 문의</p>
-          <h2>자동화가 필요한 현장 데이터를 알려주세요.</h2>
-          <p class="section-copy">관심 분야와 현장 상황을 남겨주시면 데이터 진단과 자동화 적용 방향을 기준으로 검토합니다.</p>
+          <h2 id="contactFormTitle">도입하고 싶은 자동화 방식을 알려주세요.</h2>
+          <p class="section-copy" id="contactFormDescription">관심 분야와 현장 상황을 남겨주시면 자동화 가능성과 적합한 도입 플랜을 검토합니다.</p>
         </div>
         <form class="contact-form" id="contactForm">
           <label>
@@ -57,32 +69,78 @@
           </label>
           <label>
             관심 분야
-            <select name="interest" required>
+            <select name="interest" id="contactInterest" required>
               <option value="">관심 분야 선택</option>
-              <option value="설비 예지 진단">설비 예지 진단</option>
-              <option value="비전 AI 검사">비전 AI 검사</option>
-              <option value="로봇 운영 자동화">로봇 운영 자동화</option>
-              <option value="운영 플랫폼">운영 플랫폼</option>
+              <option value="PoC 문의">PoC 문의</option>
+              <option value="Build 문의">Build 문의</option>
+              <option value="Operation 문의">Operation 문의</option>
+              <option value="AI 비전 자동화">AI 비전 자동화</option>
+              <option value="로봇 제어 자동화">로봇 제어 자동화</option>
+              <option value="센서 데이터 분석">센서 데이터 분석</option>
+              <option value="NeuraMotion OS 도입 문의">NeuraMotion OS 도입 문의</option>
             </select>
           </label>
           <label>
-            프로젝트 내용
-            <textarea name="message" rows="4" placeholder="자동화가 필요한 공정, 설비, 데이터 종류를 간단히 적어주세요." required></textarea>
+            상담 내용
+            <textarea name="message" id="contactMessage" rows="4" placeholder="현장 환경, 장비 구성, 데이터 상태, 원하는 자동화 범위를 간단히 적어주세요." required></textarea>
           </label>
-          <button class="btn btn-primary contact-submit" type="submit">자동화 상담 요청</button>
+          <button class="btn btn-primary contact-submit" type="submit">도입 상담 요청</button>
           <p class="form-status" id="formStatus" role="status"></p>
         </form>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>NeuraMotion AI</span>
-      <span>현장 장비와 연결되는 피지컬 AI</span>
+    <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo footer-logo" href="./index.html#hero" aria-label="NeuraMotion AI 홈">
+            <span class="logo-mark"></span>
+            <span>NeuraMotion AI</span>
+          </a>
+          <p class="footer-tagline">AI 비전·센서·로봇 제어를 결합해<br>고객 현장에 맞는 자동화 시스템을 구축합니다.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <strong>솔루션</strong>
+            <a href="./index.html#solutions">핵심 솔루션</a>
+            <a href="./index.html#products">제품 라인업</a>
+            <a href="./platform.html">운영 플랫폼</a>
+          </div>
+          <div class="footer-col">
+            <strong>도입 안내</strong>
+            <a href="./index.html#projects">대표 사례</a>
+            <a href="./index.html#plans">도입 플랜</a>
+            <a href="./index.html#process">구축 절차</a>
+            <a href="./contact.html">도입 상담</a>
+          </div>
+          <div class="footer-col">
+            <strong>연락처</strong>
+            <a href="mailto:contact@neuramotion.ai">contact@neuramotion.ai</a>
+            <a href="tel:+82-2-0000-0000">02-0000-0000</a>
+            <span>서울특별시 강남구<br>테헤란로 123, 15층</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <span>대표자: 김뉴라</span>
+          <span>사업자등록번호: 000-00-00000</span>
+          <span>통신판매업 신고번호: 2025-서울강남-0000</span>
+        </div>
+        <div class="footer-copy">
+          <span>© 2025 NeuraMotion AI. All rights reserved.</span>
+          <div class="footer-policy">
+            <a href="#">개인정보처리방침</a>
+            <a href="#">이용약관</a>
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
 
+  <script src="./local-ui.js?v=hero-cycle-local-fallback"></script>
   <script type="module" src="./script.js"></script>
 </body>
 </html>

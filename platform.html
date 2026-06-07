@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NeuraMotion OS - AI 기반 로봇 운영 플랫폼">
+  <meta name="description" content="NeuraMotion OS - AI 인식, 센서 데이터, 로봇 제어를 통합 관리하는 운영 플랫폼">
   <title>NeuraMotion OS | 운영 플랫폼</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=business-model-polish">
+  <link rel="stylesheet" href="./platform-tabs-visual-test.css?v=platform-tabs-applied">
 </head>
 <body class="platform-page">
   <div class="site-noise" aria-hidden="true"></div>
@@ -14,10 +15,24 @@
       <span class="logo-mark"></span>
       <span>NeuraMotion AI</span>
     </a>
-    <nav class="nav" id="nav" aria-label="주요 메뉴">
+        <nav class="nav" id="nav" aria-label="주요 메뉴">
       <a href="./index.html#hero">홈</a>
-      <a href="./index.html#solutions">솔루션</a>
-      <a href="./platform.html" aria-current="page">운영 플랫폼</a>
+      <div class="nav-group">
+        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">솔루션·제품 <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="./index.html#solutions" role="menuitem">핵심 솔루션</a>
+          <a href="./index.html#products" role="menuitem">제품 라인업</a>
+          <a href="./platform.html" aria-current="page" role="menuitem">운영 플랫폼</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-group-toggle" type="button" aria-haspopup="true" aria-expanded="false">사례·도입 <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="./index.html#projects" role="menuitem">대표 사례</a>
+          <a href="./index.html#plans" role="menuitem">도입 플랜</a>
+          <a href="./index.html#process" role="menuitem">구축 절차</a>
+        </div>
+      </div>
       <a href="./community.html">커뮤니티</a>
       <a href="./contact.html">문의</a>
     </nav>
@@ -28,163 +43,171 @@
   </header>
 
   <main>
-    <section class="section platform-hero" id="platform">
-      <div class="container reveal">
-        <p class="eyebrow">운영 플랫폼</p>
-        <h1>NeuraMotion OS</h1>
-        <p class="platform-subtitle">AI 기반 로봇 운영 플랫폼</p>
-        <p class="platform-lead">로봇, 센서, 비전 AI 데이터를 하나의 화면에서 확인하고 현장 자동화 판단 흐름을 관리합니다.</p>
-        <div class="platform-hero-status" aria-label="운영 플랫폼 요약 상태">
-          <span><strong>전체 시스템</strong> 정상</span>
-          <span><strong>로봇 운영</strong> 활성화</span>
-          <span><strong>비전 AI</strong> 감지 중</span>
-          <span><strong>센서 데이터</strong> 안정</span>
-        </div>
-      </div>
+    <section class="section platform-hero platform-v2-hero" id="platform">
+      <div class="container platform-v2-hero-grid reveal">
+        <div class="platform-v2-copy">
+          <p class="eyebrow">운영 플랫폼</p>
+          <h1>AI 인식, 센서, 로봇 제어를 통합 관리합니다.</h1>
+          <p class="platform-lead">NeuraMotion OS는 AI 비전 검사, 센서 데이터, 로봇 상태, 작업 흐름을 하나의 화면에서 관리하는 통합 운영 플랫폼입니다.</p>
+          <div class="platform-v2-actions">
+            <a class="btn btn-primary" href="#nm-os-interface">플랫폼 화면 보기</a>
+            <a class="btn btn-secondary" href="./contact.html">도입 상담하기</a>
+          </div>
+        </div>      </div>
     </section>
 
-    <section class="section platform-workspace">
+    <section class="section platform-workspace platform-v2-workspace" id="nm-os-interface">
       <div class="container">
-        <div class="platform-tabs reveal" role="tablist" aria-label="운영 플랫폼 화면 선택">
-          <button class="nm-platform-tab active" type="button" data-platform-tab="overview">개요</button>
-          <button class="nm-platform-tab" type="button" data-platform-tab="fleet">로봇 운영</button>
-          <button class="nm-platform-tab" type="button" data-platform-tab="vision">비전 AI</button>
-          <button class="nm-platform-tab" type="button" data-platform-tab="sensor">센서 데이터</button>
-          <button class="nm-platform-tab" type="button" data-platform-tab="nav">자율주행 경로</button>
-        </div>
-
-        <section class="nm-os-interface reveal" id="nm-os-interface" aria-label="NeuraMotion OS 운영 플랫폼">
-          <div class="nm-os-shell platform-os-shell">
-            <div class="nm-os-head">
-              <div>
-                <p class="nm-os-kicker">AI 기반 로봇 운영 플랫폼</p>
-                <h2>NeuraMotion OS</h2>
-                <p class="nm-os-summary">현장 데이터 수집, 로봇 운영, 비전 감지, 자율주행 경로 상태를 탭별로 확인합니다.</p>
-              </div>
-              <span class="nm-system-state"><i></i>전체 시스템 정상</span>
-            </div>
-
-            <div class="nm-platform-panel active" data-platform-panel="overview">
-              <p class="nm-panel-intro">전체 운영 상태를 요약해 현재 자동화 시스템이 정상적으로 판단 가능한지 확인합니다.</p>
-              <div class="nm-status-grid" aria-label="실시간 상태 카드">
-                <article class="nm-status-card">
-                  <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>AI 추론</em></div>
-                  <strong>정상</strong>
-                  <p>비전·센서 분석 결과 수신 중</p>
-                  <div class="nm-progress"><span style="--nm-width: 96%"></span></div>
-                </article>
-                <article class="nm-status-card">
-                  <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>센서 융합</em></div>
-                  <strong>안정</strong>
-                  <p>LiDAR, IMU, 카메라 동기화</p>
-                  <div class="nm-progress"><span style="--nm-width: 88%"></span></div>
-                </article>
-                <article class="nm-status-card">
-                  <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>로봇 운영</em></div>
-                  <strong>활성화</strong>
-                  <p>이동 로봇 3대 작업 대기</p>
-                  <div class="nm-progress"><span style="--nm-width: 78%"></span></div>
-                </article>
-                <article class="nm-status-card">
-                  <div class="nm-card-top"><span class="nm-pulse-dot"></span><em>운영 판단</em></div>
-                  <strong>분석 중</strong>
-                  <p>경로, 감지, 알림 상태 검토</p>
-                  <div class="nm-progress"><span style="--nm-width: 84%"></span></div>
-                </article>
-              </div>
-              <div class="nm-pipeline" aria-label="AI 처리 흐름">
-                <span>수집</span><i></i><span>진단</span><i></i><span>판단</span><i></i><span>자동화</span><i></i><span>개선</span><b></b>
-              </div>
-            </div>
-
-            <div class="nm-platform-panel" data-platform-panel="fleet">
-              <p class="nm-panel-intro">로봇별 상태, 배터리, 현재 위치, 작업 내용을 운영 표로 확인합니다.</p>
-              <article class="nm-panel nm-fleet-panel">
-                <div class="nm-panel-title"><span>로봇 운영 현황</span><em>실시간 운영</em></div>
-                <div class="nm-fleet-table">
-                  <div class="nm-fleet-row nm-fleet-head"><span>로봇 ID</span><span>상태</span><span>배터리</span><span>위치</span><span>작업</span></div>
-                  <div class="nm-fleet-row"><span>NM-A1</span><span><i class="nm-state-dot"></i>운영 중</span><span><b style="--nm-battery:87%"></b>87%</span><span>구역 A</span><span>경로 매핑</span></div>
-                  <div class="nm-fleet-row"><span>NM-B2</span><span><i class="nm-state-dot nm-warn"></i>충전 중</span><span><b style="--nm-battery:42%"></b>42%</span><span>충전 도크</span><span>대기</span></div>
-                  <div class="nm-fleet-row"><span>NM-C3</span><span><i class="nm-state-dot"></i>검사 중</span><span><b style="--nm-battery:91%"></b>91%</span><span>검사 구역</span><span>객체 감지</span></div>
-                </div>
-              </article>
-            </div>
-
-            <div class="nm-platform-panel" data-platform-panel="vision">
-              <p class="nm-panel-intro">카메라 감지 결과와 신뢰도, 거리, 추적 상태를 확인합니다.</p>
-              <article class="nm-panel nm-vision-panel">
-                <div class="nm-panel-title"><span>비전 AI 감지</span><em>추적 고정</em></div>
-                <div class="nm-camera-view">
-                  <div class="nm-detection-box"><span>플라스틱 병</span></div>
-                  <div class="nm-scan-line"></div>
-                </div>
-                <dl class="nm-detect-stats">
-                  <div><dt>객체</dt><dd>플라스틱 병</dd></div>
-                  <div><dt>신뢰도</dt><dd>98.4%</dd></div>
-                  <div><dt>거리</dt><dd>1.2m</dd></div>
-                  <div><dt>추적</dt><dd><i class="nm-track-pulse"></i>고정</dd></div>
-                </dl>
-              </article>
-            </div>
-
-            <div class="nm-platform-panel" data-platform-panel="sensor">
-              <p class="nm-panel-intro">LiDAR, IMU, 카메라, 모터 전류, 온도 채널의 흐름과 이상 여부를 확인합니다.</p>
-              <article class="nm-panel nm-sensor-panel">
-                <div class="nm-panel-title"><span>센서 데이터 시각화</span><em>5개 채널</em></div>
-                <svg class="nm-wave" viewBox="0 0 360 120" aria-hidden="true">
-                  <path d="M0 74 C28 32 58 98 92 56 S152 32 184 68 244 100 276 48 332 38 360 58"></path>
-                  <path d="M0 92 C40 64 72 68 106 84 S174 104 212 62 282 36 360 76"></path>
-                </svg>
-                <div class="nm-streams">
-                  <span>라이다 120k pts/s</span><span>관성 센서 240Hz</span><span>카메라 30fps</span><span>모터 전류 18.2A</span><span>온도 38.2℃</span>
-                </div>
-              </article>
-            </div>
-
-            <div class="nm-platform-panel" data-platform-panel="nav">
-              <p class="nm-panel-intro">현재 위치, 목표 지점, 장애물, 경로 상태를 기준으로 자율주행 판단 흐름을 확인합니다.</p>
-              <article class="nm-panel nm-map-panel">
-                <div class="nm-panel-title"><span>자율주행 경로</span><em>장애물 회피 중</em></div>
-                <div class="nm-nav-layout">
-                  <div class="nm-navigation-map" aria-label="자율주행 경로 미니맵">
-                    <div class="nm-map-block dock">충전 도크</div>
-                    <div class="nm-map-block inspection">검사 구역</div>
-                    <div class="nm-map-block loading">적재 구역</div>
-                    <div class="nm-map-block restricted">제한 구역</div>
-                    <div class="nm-map-block press">PRESS-01</div>
-                    <svg class="nm-nav-svg" viewBox="0 0 720 320" aria-hidden="true">
-                      <path class="nm-safe-lane" d="M92 252 H210 V202 H328 V145 H462 V90 H610"></path>
-                      <path class="nm-route-flow" d="M92 252 H210 V202 H328 V145 H462 V90 H610"></path>
-                      <circle class="nm-route-node current" cx="92" cy="252" r="8"></circle>
-                      <circle class="nm-route-node checkpoint" cx="328" cy="145" r="6"></circle>
-                      <circle class="nm-route-node target" cx="610" cy="90" r="10"></circle>
-                      <circle class="nm-moving-packet" r="5">
-                        <animateMotion dur="6s" repeatCount="indefinite" path="M92 252 H210 V202 H328 V145 H462 V90 H610" />
-                      </circle>
-                    </svg>
-                    <div class="nm-amr-marker">
-                      <span class="nm-lidar-ring"></span>
-                      <strong>AMR-03</strong>
-                    </div>
-                    <span class="nm-map-callout current">현재 위치 · 구역 C</span>
-                    <span class="nm-map-callout target">목표 지점 · Dock 02</span>
-                  </div>
-                  <dl class="nm-nav-status">
-                    <div><dt>현재 위치</dt><dd>구역 C</dd></div>
-                    <div><dt>목표 지점</dt><dd>충전 도크 02</dd></div>
-                    <div><dt>경로 상태</dt><dd>장애물 회피 중</dd></div>
-                    <div><dt>LiDAR</dt><dd>활성화</dd></div>
-                    <div><dt>도착 예상</dt><dd>42초</dd></div>
-                  </dl>
-                </div>
-              </article>
-            </div>
+        <section class="tabs-shell" aria-label="NeuraMotion OS 운영 플랫폼">
+          <div class="tabs-header reveal">
+            <p>NeuraMotion OS</p>
+            <h1>NeuraMotion OS</h1>
+            <span><i></i> AI·센서·로봇 통합 운영</span>
           </div>
+
+          <div class="tabs-nav reveal" role="tablist" aria-label="운영 플랫폼 화면 선택">
+            <button class="active" type="button" data-panel="fleet">로봇 운영</button>
+            <button type="button" data-panel="vision">비전 AI</button>
+            <button type="button" data-panel="sensor">센서 데이터</button>
+          </div>
+
+          <section class="tabs-panel active" data-panel="fleet">
+            <div class="visual-card fleet-visual fleet-real-dashboard reveal">
+              <div class="visual-copy">
+                <span>Robot Fleet</span>
+                <h2>로봇 운영 현황</h2>
+                <p>로봇 상태와 작업 위치를 한눈에 확인합니다.</p>
+              </div>
+              <div class="real-image fleet-image" aria-label="공장 내 이동 로봇 운영 화면">
+                <span class="fleet-live-dot dot-a"></span>
+                <span class="fleet-live-dot dot-b"></span>
+                <article class="fleet-overlay-card fleet-card-a"><strong>NM-A1</strong><span>운영 중</span><em>구역 A</em></article>
+                <article class="fleet-overlay-card fleet-card-b"><strong>NM-C3</strong><span>검사 중</span><em>구역 C</em></article>
+              </div>
+              <div class="fleet-list">
+                <article><strong>NM-A1</strong><span>운영 중 · 구역 A</span><b style="--value:87%"></b></article>
+                <article><strong>NM-B2</strong><span>충전 중 · 도크</span><b style="--value:42%"></b></article>
+                <article><strong>NM-C3</strong><span>검사 중 · 구역 C</span><b style="--value:91%"></b></article>
+              </div>
+              <span class="scan-glow"></span>
+            </div>
+          </section>
+
+          <section class="tabs-panel" data-panel="vision">
+            <div class="visual-card vision-visual vision-real-dashboard reveal">
+              <div class="visual-copy">
+                <span>Vision AI</span>
+                <h2>부품 검사 판정</h2>
+                <p>카메라 인식 결과와 검사 판정을 표시합니다.</p>
+              </div>
+              <div class="vision-layout">
+                <div class="vision-camera-panel">
+                  <div class="vision-part-photo"><span class="detect"></span><span class="scan"></span><b>OK</b></div>
+                  <div class="vision-mini-metrics"><span>검출 완료</span><span>결함 없음</span><span>120ms</span></div>
+                </div>
+                <article class="vision-result"><span>검사 결과</span><strong>정상</strong><em>신뢰도 98.6%</em><i></i><small>검사 시간 120 ms</small></article>
+              </div>
+            </div>
+          </section>
+
+          <section class="tabs-panel" data-panel="sensor">
+            <div class="visual-card sensor-visual reveal">
+              <div class="visual-copy">
+                <span>Sensor Data</span>
+                <h2>센서 데이터를 AI 판단으로 연결합니다.</h2>
+                <p>LiDAR, IMU, 전류, 온도 신호를 통합 분석합니다.</p>
+              </div>
+              <div class="real-image sensor-image" aria-hidden="true"></div>
+              <div class="wave-board sensor-dashboard">
+                <div class="sensor-board-head">
+                  <strong>실시간 센서 통합</strong>
+                  <span>AI 입력 신호</span>
+                </div>
+                <div class="sensor-board-grid">
+                  <div class="sensor-chart" aria-hidden="true">
+                    <svg viewBox="0 0 620 220">
+                      <line x1="0" y1="44" x2="620" y2="44" />
+                      <line x1="0" y1="88" x2="620" y2="88" />
+                      <line x1="0" y1="132" x2="620" y2="132" />
+                      <line x1="0" y1="176" x2="620" y2="176" />
+                      <path class="signal-fill" d="M0 154 C70 120 124 128 178 94 C238 56 298 70 352 118 C410 170 478 164 620 84 L620 220 L0 220 Z" />
+                      <path class="sensor-line lidar" d="M0 154 C70 120 124 128 178 94 C238 56 298 70 352 118 C410 170 478 164 620 84" />
+                      <path class="sensor-line imu" d="M0 176 C76 148 142 132 210 148 C290 168 356 188 430 126 C492 74 548 90 620 142" />
+                      <path class="sensor-line motor" d="M0 118 C78 112 126 138 190 122 C258 104 310 114 370 92 C452 62 516 76 620 58" />
+                      <circle class="signal-dot" cx="178" cy="94" r="6" />
+                      <circle class="signal-dot delay-a" cx="430" cy="126" r="6" />
+                      <circle class="signal-dot delay-b" cx="620" cy="58" r="6" />
+                    </svg>
+                  </div>
+                  <div class="sensor-readouts">
+                    <article><span>LiDAR</span><strong>안정</strong><i style="--v:92%"></i></article>
+                    <article><span>IMU</span><strong>정상</strong><i style="--v:88%"></i></article>
+                    <article><span>Camera</span><strong>30fps</strong><i style="--v:76%"></i></article>
+                    <article><span>Motor</span><strong>18.2A</strong><i style="--v:69%"></i></article>
+                  </div>
+                </div>
+                <div class="sensor-status-row">
+                  <span>동기화 완료</span><span>노이즈 보정</span><span>AI 분석 대기</span>
+                </div>
+              </div>
+            </div>
+          </section>
         </section>
       </div>
     </section>
   </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo footer-logo" href="./index.html#hero" aria-label="NeuraMotion AI 홈">
+            <span class="logo-mark"></span>
+            <span>NeuraMotion AI</span>
+          </a>
+          <p class="footer-tagline">AI 비전·센서·로봇 제어를 결합해<br>고객 현장에 맞는 자동화 시스템을 구축합니다.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <strong>솔루션</strong>
+            <a href="./index.html#solutions">핵심 솔루션</a>
+            <a href="./index.html#products">제품 라인업</a>
+            <a href="./platform.html">운영 플랫폼</a>
+          </div>
+          <div class="footer-col">
+            <strong>도입 안내</strong>
+            <a href="./index.html#projects">대표 사례</a>
+            <a href="./index.html#plans">도입 플랜</a>
+            <a href="./index.html#process">구축 절차</a>
+            <a href="./contact.html">도입 상담</a>
+          </div>
+          <div class="footer-col">
+            <strong>연락처</strong>
+            <a href="mailto:contact@neuramotion.ai">contact@neuramotion.ai</a>
+            <a href="tel:+82-2-0000-0000">02-0000-0000</a>
+            <span>서울특별시 강남구<br>테헤란로 123, 15층</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <span>대표자: 김뉴라</span>
+          <span>사업자등록번호: 000-00-00000</span>
+          <span>통신판매업 신고번호: 2025-서울강남-0000</span>
+        </div>
+        <div class="footer-copy">
+          <span>© 2025 NeuraMotion AI. All rights reserved.</span>
+          <div class="footer-policy">
+            <a href="#">개인정보처리방침</a>
+            <a href="#">이용약관</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./local-ui.js?v=hero-cycle-local-fallback"></script>
   <script type="module" src="./script.js"></script>
+  <script src="./platform-tabs-visual-test.js?v=platform-tabs-applied"></script>
 </body>
 </html>
 

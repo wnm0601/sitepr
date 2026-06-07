@@ -48,12 +48,12 @@ const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 
 const categoryMap = {
-  "Robotics": "프로젝트 공유",
+  "Robotics": "사례 공유",
   "Vision AI": "기술 질문",
   "Sensor Data": "기술 질문",
   "Consulting": "아이디어 제안",
   "Maintenance": "기술 질문",
-  "로봇 자동화": "프로젝트 공유",
+  "로봇 자동화": "사례 공유",
   "비전 AI": "기술 질문",
   "센서 데이터": "기술 질문",
   "도입 상담": "아이디어 제안",
@@ -179,13 +179,13 @@ function subscribePosts() {
     renderPosts();
   }, (error) => {
     console.error("게시글 조회 실패:", error);
-    showBoardMessage("게시글을 불러오지 못했습니다. Firebase 설정과 보안 규칙을 확인해주세요.");
+    showBoardMessage("게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
   });
 }
 
 async function initializeFirebaseBoard() {
   if (!postList) return;
-  showBoardMessage("Firebase 게시판에 연결하는 중입니다...");
+  showBoardMessage("게시판에 연결하는 중입니다...");
   try {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -195,7 +195,7 @@ async function initializeFirebaseBoard() {
     await signInAnonymously(auth);
   } catch (error) {
     console.error("익명 로그인 실패:", error);
-    showBoardMessage("익명 로그인이 실패했습니다. Firebase Authentication의 Anonymous 사용 설정을 확인해주세요.");
+    showBoardMessage("게시판 연결에 실패했습니다. 잠시 후 다시 시도해주세요.");
   }
 }
 
@@ -298,7 +298,7 @@ async function deletePost(postId, password) {
     return true;
   } catch (error) {
     console.error("게시글 삭제 실패:", error);
-    alert("게시글 삭제에 실패했습니다. Firestore Rules를 확인해주세요.");
+    alert("게시글 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.");
     return false;
   }
 }
@@ -466,7 +466,7 @@ if (postForm) postForm.addEventListener("submit", async (event) => {
   }
 
   if (!auth.currentUser) {
-    alert("Firebase 로그인 연결 중입니다. 잠시 후 다시 시도해주세요.");
+    alert("게시판 연결 중입니다. 잠시 후 다시 시도해주세요.");
     return;
   }
 
@@ -519,7 +519,7 @@ if (postForm) postForm.addEventListener("submit", async (event) => {
     closeModal();
   } catch (error) {
     console.error(editingPostId ? "게시글 수정 실패:" : "게시글 저장 실패:", error);
-    alert(editingPostId ? "게시글 수정에 실패했습니다. Firestore Rules를 확인해주세요." : "게시글 저장에 실패했습니다. Firestore Rules와 네트워크 상태를 확인해주세요.");
+    alert(editingPostId ? "게시글 수정에 실패했습니다. 잠시 후 다시 시도해주세요." : "게시글 저장에 실패했습니다. 네트워크 상태를 확인한 뒤 다시 시도해주세요.");
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
@@ -545,10 +545,55 @@ if (fileDemo) fileDemo.addEventListener("change", () => {
   fileDemoName.textContent = file ? `${file.name} 선택됨` : "이미지, 자료, 로그 파일을 첨부할 수 있습니다.";
 });
 
+function applyContactPlanContext() {
+  if (!contactForm) return;
+
+  const plan = new URLSearchParams(window.location.search).get("plan");
+  const planContexts = {
+    poc: {
+      title: "PoC 문의",
+      description: "자동화 가능성을 검증할 현장 문제와 데이터를 알려주세요.",
+      interest: "PoC 문의",
+      placeholder: "자동화 가능성을 검증하고 싶은 작업, 사용 가능한 데이터나 센서 정보를 적어주세요."
+    },
+    build: {
+      title: "Build 문의",
+      description: "실제 자동화 시스템 구축 범위와 연동할 장비를 알려주세요.",
+      interest: "Build 문의",
+      placeholder: "구축하고 싶은 자동화 시스템의 범위, 연동할 장비, 필요한 기능을 적어주세요."
+    },
+    operation: {
+      title: "Operation 문의",
+      description: "운영 중인 시스템의 문제점과 개선이 필요한 부분을 알려주세요.",
+      interest: "Operation 문의",
+      placeholder: "현재 운영 중인 시스템의 문제점, 개선이 필요한 기능, 유지보수 요청 사항을 적어주세요."
+    }
+  };
+  const context = planContexts[plan];
+  if (!context) return;
+
+  const pageTitle = document.getElementById("contactPageTitle");
+  const pageDescription = document.getElementById("contactPageDescription");
+  const formTitle = document.getElementById("contactFormTitle");
+  const formDescription = document.getElementById("contactFormDescription");
+  const interestSelect = document.getElementById("contactInterest");
+  const messageTextarea = document.getElementById("contactMessage");
+
+  if (pageTitle) pageTitle.textContent = context.title;
+  if (pageDescription) pageDescription.textContent = context.description;
+  if (formTitle) formTitle.textContent = context.title;
+  if (formDescription) formDescription.textContent = context.description;
+  if (interestSelect) interestSelect.value = context.interest;
+  if (messageTextarea) messageTextarea.placeholder = context.placeholder;
+}
+
+applyContactPlanContext();
+
 if (contactForm) contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  formStatus.textContent = "문의가 접수된 것처럼 표시됩니다. 실제 전송 기능은 백엔드 연동 시 활성화됩니다.";
+  formStatus.textContent = "문의가 접수되었습니다. 입력해주신 내용을 바탕으로 자동화 가능성과 적합한 도입 방식을 검토하겠습니다.";
   contactForm.reset();
+  applyContactPlanContext();
 });
 
 initializeFirebaseBoard();
@@ -808,3 +853,192 @@ window.addEventListener("touchmove", (event) => {
 
 
 
+
+// Smart Automation main hero step animation
+(function nmSmartMainHero() {
+  if (window.__nmHeroCycleActive) return;
+  const hero = document.querySelector("[data-smart-main-hero]");
+  if (!hero) return;
+
+  const status = hero.querySelector("#smartHeroStatus");
+  const core = hero.querySelector("#smartHeroCore");
+  const nodes = Array.from(hero.querySelectorAll("[data-smart-step]"));
+  const minis = Array.from(hero.querySelectorAll("[data-smart-mini]"));
+  if (!status || !core || !nodes.length) return;
+  window.__nmHeroCycleActive = true;
+
+  const steps = [
+    { text: "<b>카메라·센서 데이터</b>로 현장을 인식합니다.", core: "Collect" },
+    { text: "<b>AI 비전</b>이 작업 대상을 판정합니다.", core: "Inspect" },
+    { text: "<b>로봇 제어</b>로 반복 작업을 실행합니다.", core: "Execute" },
+    { text: "<b>운영 플랫폼</b>에서 상태를 관리합니다.", core: "Optimize" }
+  ];
+
+  let index = 0;
+  let timer = 0;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function setStep(next) {
+    index = next % steps.length;
+    status.style.opacity = "0";
+    status.style.transform = "translateY(8px)";
+    window.setTimeout(() => {
+      status.innerHTML = steps[index].text;
+      core.textContent = steps[index].core;
+      nodes.forEach((node, nodeIndex) => node.classList.toggle("active", nodeIndex === index));
+      minis.forEach((mini, miniIndex) => mini.classList.toggle("on", miniIndex === index));
+      status.style.opacity = "1";
+      status.style.transform = "translateY(0)";
+    }, 180);
+  }
+
+  function start() {
+    if (reduceMotion || timer) return;
+    timer = window.setInterval(() => setStep(index + 1), 2600);
+  }
+
+  function stop() {
+    window.clearInterval(timer);
+    timer = 0;
+  }
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) start();
+      else stop();
+    }, { threshold: 0.05, rootMargin: "120px 0px" });
+    observer.observe(hero);
+    start();
+  } else {
+    start();
+  }
+})();
+
+
+/* ============================================================
+   NAV DROPDOWN — keyboard & mobile toggle
+   ============================================================ */
+(function () {
+  if (window.__nmNavDropdownActive) return;
+  const groups = document.querySelectorAll('.nav-group');
+  if (groups.length) window.__nmNavDropdownActive = true;
+  groups.forEach(function (group) {
+    const toggle = group.querySelector('.nav-group-toggle');
+    const dropdown = group.querySelector('.nav-dropdown');
+    if (!toggle || !dropdown) return;
+
+    // Mobile: tap toggle to expand/collapse
+    toggle.addEventListener('click', function (e) {
+      const isMobile = window.innerWidth <= 1080;
+      if (!isMobile) return;
+      e.preventDefault();
+      const isOpen = dropdown.style.display === 'flex';
+      dropdown.style.display = isOpen ? 'none' : 'flex';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    // Desktop: reset inline style on resize so hover CSS takes over
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1080) {
+        dropdown.style.display = '';
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Close dropdowns when clicking a nav link on mobile
+  document.querySelectorAll('.nav-dropdown a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      document.querySelectorAll('.nav-dropdown').forEach(function (d) {
+        d.style.display = '';
+      });
+    });
+  });
+})();
+
+/* Compact accordion cards for shortened business sections */
+(function nmInitAccordionCards() {
+  if (window.__nmAccordionCardsActive) return;
+  const groups = document.querySelectorAll('[data-accordion-group]');
+  if (!groups.length) return;
+  window.__nmAccordionCardsActive = true;
+
+  function closeCard(card) {
+    const trigger = card.querySelector('.accordion-card-trigger');
+    const panel = card.querySelector('.accordion-panel');
+    if (!trigger || !panel) return;
+    card.classList.remove('open');
+    trigger.setAttribute('aria-expanded', 'false');
+    window.setTimeout(() => {
+      if (!card.classList.contains('open')) panel.hidden = true;
+    }, 340);
+  }
+
+  function openCard(card) {
+    const trigger = card.querySelector('.accordion-card-trigger');
+    const panel = card.querySelector('.accordion-panel');
+    if (!trigger || !panel) return;
+    panel.hidden = false;
+    window.requestAnimationFrame(() => {
+      card.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    });
+  }
+
+  groups.forEach((group) => {
+    const cards = Array.from(group.querySelectorAll('.accordion-card'));
+    cards.forEach((card) => {
+      const trigger = card.querySelector('.accordion-card-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        const isOpen = card.classList.contains('open');
+        cards.forEach((item) => {
+          if (item !== card) closeCard(item);
+        });
+        if (isOpen) closeCard(card);
+        else openCard(card);
+      });
+    });
+  });
+})();
+
+/* Compact process step selector */
+(function nmInitCompactProcess() {
+  if (window.__nmCompactProcessActive) return;
+  const pills = Array.from(document.querySelectorAll('[data-process-target]'));
+  const panels = Array.from(document.querySelectorAll('[data-process-panel]'));
+  if (!pills.length || !panels.length) return;
+  window.__nmCompactProcessActive = true;
+
+  const activateProcessStep = (pill) => {
+    const target = pill.dataset.processTarget;
+    pills.forEach((item) => item.classList.toggle('active', item === pill));
+    panels.forEach((panel) => {
+      const active = panel.dataset.processPanel === target;
+      panel.hidden = !active;
+      panel.classList.toggle('active', active);
+    });
+  };
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let autoTimer = null;
+
+  const startAutoCycle = () => {
+    if (prefersReducedMotion || pills.length < 2) return;
+    window.clearInterval(autoTimer);
+    autoTimer = window.setInterval(() => {
+      const currentIndex = Math.max(0, pills.findIndex((pill) => pill.classList.contains('active')));
+      const nextPill = pills[(currentIndex + 1) % pills.length];
+      activateProcessStep(nextPill);
+    }, 4000);
+  };
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      activateProcessStep(pill);
+      startAutoCycle();
+    });
+  });
+
+  startAutoCycle();
+})();

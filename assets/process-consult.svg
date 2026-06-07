@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" fill="none">
+<rect width="1200" height="780" rx="36" fill="#F8FAFC"/>
+<rect x="44" y="44" width="1112" height="692" rx="28" fill="url(#g)" stroke="#D9E3F0"/>
+<rect x="94" y="102" width="430" height="530" rx="28" fill="#FFFFFF" stroke="#D9E3F0"/>
+<rect x="146" y="168" width="320" height="28" rx="14" fill="#0F172A" opacity="0.92"/>
+<rect x="146" y="226" width="238" height="18" rx="9" fill="#94A3B8"/>
+<rect x="146" y="260" width="266" height="18" rx="9" fill="#CBD5E1"/>
+<rect x="146" y="294" width="218" height="18" rx="9" fill="#E2E8F0"/>
+<circle cx="185" cy="392" r="54" fill="#D1FAE5"/>
+<path d="M166 393l14 14 28-32" stroke="#10B981" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="146" y="490" width="230" height="18" rx="9" fill="#CBD5E1"/>
+<rect x="146" y="524" width="190" height="18" rx="9" fill="#E2E8F0"/>
+<rect x="584" y="112" width="520" height="250" rx="28" fill="#FFFFFF" stroke="#D9E3F0"/>
+<circle cx="700" cy="204" r="56" fill="#DBEAFE"/>
+<circle cx="672" cy="192" r="18" fill="#60A5FA"/><circle cx="728" cy="192" r="18" fill="#60A5FA"/><path d="M646 248c22-28 88-28 110 0" stroke="#60A5FA" stroke-width="16" stroke-linecap="round"/>
+<path d="M812 170h210" stroke="#0F172A" stroke-width="24" stroke-linecap="round"/><path d="M812 220h174" stroke="#94A3B8" stroke-width="18" stroke-linecap="round"/><path d="M812 262h130" stroke="#CBD5E1" stroke-width="18" stroke-linecap="round"/>
+<rect x="584" y="400" width="520" height="220" rx="28" fill="#FFFFFF" stroke="#D9E3F0"/>
+<rect x="640" y="470" width="138" height="84" rx="20" fill="#E2E8F0"/><rect x="805" y="470" width="138" height="84" rx="20" fill="#E2E8F0"/><rect x="970" y="470" width="78" height="84" rx="20" fill="#CCFBF1"/>
+<path d="M778 512h27" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/><path d="M943 512h27" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+<defs><linearGradient id="g" x1="86" y1="56" x2="1120" y2="724" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#F1F5F9"/></linearGradient></defs></svg>
